@@ -13,31 +13,35 @@ public class JetPack : MonoBehaviour, IPointerUpHandler,IPointerDownHandler
 
 
     public void OnPointerDown(PointerEventData eventData)
-    {   
-        //버튼을 클릭했을때 이펙트를 켜주고 애니메이션을 실행, 중력을 끔
-        ClickButton = true;
-        JetPackEffect.Play();
-        myChar.GetComponent<LittleNut>().myAnim.SetTrigger("Fly");
-        myChar.GetComponent<LittleNut>().myRigid.useGravity = false;
-        
-
-        //비행중이 아니고 리지드바디의 벨로시티가 0의 근사치라면 현재 포지션의 y값에 최고 제한 높이를 더해줌
-        if (!myChar.GetComponent<LittleNut>().myAnim.GetBool("IsFly") && Mathf.Approximately(myChar.GetComponent<LittleNut>().myRigid.velocity.y, 0.0f))
+    {
+        if (!myChar.GetComponent<LittleNut>().myAnim.GetBool("IsSkillShot"))
         {
-            Limit = myChar.transform.position.y + LimitRange;
-           
+            //버튼을 클릭했을때 이펙트를 켜주고 애니메이션을 실행, 중력을 끔
+            ClickButton = true;
+            JetPackEffect.Play();
+            myChar.GetComponent<LittleNut>().myAnim.SetTrigger("Fly");
+            myChar.GetComponent<LittleNut>().myRigid.useGravity = false;
+
+
+            //비행중이 아니고 리지드바디의 벨로시티가 0의 근사치라면 현재 포지션의 y값에 최고 제한 높이를 더해줌
+            if (!myChar.GetComponent<LittleNut>().myAnim.GetBool("IsFly") && Mathf.Approximately(myChar.GetComponent<LittleNut>().myRigid.velocity.y, 0.0f))
+            {
+                Limit = myChar.transform.position.y + LimitRange;
+
+            }
         }
-     
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //버튼을 떼면 이펙트를 꺼주고 중력을 켜줌, 그리고 리지드바디의 벨로시티값을 0으로 초기화 시켜주어 addforce의 영향을 받지 않게함.
-        ClickButton = false;
-        JetPackEffect.Stop();
-        myChar.GetComponent<LittleNut>().myRigid.useGravity = true;
-        myChar.GetComponent<LittleNut>().myRigid.velocity = new Vector3(0,0.1f,0);
-        
+        if (!myChar.GetComponent<LittleNut>().myAnim.GetBool("IsSkillShot"))
+        {
+            //버튼을 떼면 이펙트를 꺼주고 중력을 켜줌, 그리고 리지드바디의 벨로시티값을 0으로 초기화 시켜주어 addforce의 영향을 받지 않게함.
+            ClickButton = false;
+            JetPackEffect.Stop();
+            myChar.GetComponent<LittleNut>().myRigid.useGravity = true;
+            myChar.GetComponent<LittleNut>().myRigid.velocity = new Vector3(0, 0.1f, 0);
+        }
     }
 
     

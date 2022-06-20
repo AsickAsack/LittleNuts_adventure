@@ -43,13 +43,13 @@ public class PlayerStat : MonoBehaviour
         get => _MaxHP;
         set => _MaxHP = value;
     }
-    private float _CurMP=40;
+    private float _CurMP=100;
     public float CurMP
     {
         get => _CurMP;
         set => _CurMP = value;
     }
-    private float _MaxMP;
+    private float _MaxMP=100;
     public float MaxMP
     {
         get => _MaxMP;
