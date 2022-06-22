@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStat : MonoBehaviour
+public class GameData : MonoBehaviour
 {
 
     #region ΩÃ±€≈Ê
-    private static PlayerStat _instance = null;
+    private static GameData _instance = null;
 
-    public static PlayerStat Instance
+    public static GameData Instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = FindObjectOfType<PlayerStat>();
+                _instance = FindObjectOfType<GameData>();
                 if (_instance == null)
                 {
                     GameObject obj = new GameObject();
-                    obj.name = "PlayerManager";
-                    _instance = obj.AddComponent<PlayerStat>();
+                    obj.name = "GameData";
+                    _instance = obj.AddComponent<GameData>();
                     DontDestroyOnLoad(obj);
                     
 
@@ -31,6 +31,8 @@ public class PlayerStat : MonoBehaviour
     }
     #endregion
 
+
+    #region «√∑π¿ÃæÓ Ω∫≈›
     private float _CurHP=100;
     public float CurHP
     {
@@ -84,6 +86,9 @@ public class PlayerStat : MonoBehaviour
         get => _MaxEXP;
         set => _MaxEXP = value;
     }
+    #endregion
 
 
+    public float BgmVolume = 0.5f;
+    public float EffectVolume = 0.5f;
 }

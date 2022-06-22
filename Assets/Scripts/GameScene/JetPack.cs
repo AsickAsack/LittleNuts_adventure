@@ -55,17 +55,17 @@ public class JetPack : MonoBehaviour, IPointerUpHandler,IPointerDownHandler
         }
 
         // 비행중이 아니라면 SP를 지속적으로 올려줌
-        if (!myChar.GetComponent<LittleNut>().myAnim.GetBool("IsFly") && PlayerStat.Instance.CurSP < 100.0f)
+        if (!myChar.GetComponent<LittleNut>().myAnim.GetBool("IsFly") && GameData.Instance.CurSP < 100.0f)
         { 
-            PlayerStat.Instance.CurSP += Time.deltaTime * 5.0f;
+            GameData.Instance.CurSP += Time.deltaTime * 5.0f;
         }
 
         //버튼을 누르고 SP가 0 이상이라면 비행을 시작함
-        if (Input.GetMouseButton(0) && ClickButton && PlayerStat.Instance.CurSP > 0.0f)
+        if (Input.GetMouseButton(0) && ClickButton && GameData.Instance.CurSP > 0.0f)
         {
             myChar.GetComponent<LittleNut>().myAnim.SetBool("IsFly", true);
             myChar.GetComponent<LittleNut>().myRigid.AddForce(Vector3.up);
-            PlayerStat.Instance.CurSP -= Time.deltaTime*10.0f;
+            GameData.Instance.CurSP -= Time.deltaTime*10.0f;
             
             // 비행중 높이가 제한해놓은 높이보다 올라가면 최대 제한높이로 맞춰줌
             if(myChar.transform.position.y > Limit)
@@ -74,12 +74,12 @@ public class JetPack : MonoBehaviour, IPointerUpHandler,IPointerDownHandler
             }
 
             // 비행중 sp가 0이 되면 추락함
-            if(PlayerStat.Instance.CurSP < 0.1f)
+            if(GameData.Instance.CurSP < 0.1f)
             {
                 ClickButton = false;
                 myChar.GetComponent<LittleNut>().myRigid.velocity = new Vector3(0,0.1f,0);
                 myChar.GetComponent<LittleNut>().myRigid.useGravity = true;
-                PlayerStat.Instance.CurSP = 0.0f;
+                GameData.Instance.CurSP = 0.0f;
                 JetPackEffect.Stop();
             }
         }

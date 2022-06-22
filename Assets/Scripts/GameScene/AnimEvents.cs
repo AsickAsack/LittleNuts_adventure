@@ -46,17 +46,17 @@ public class AnimEvents : MonoBehaviour
 
     public void TrrigerSkillShot()
     {
-        if(!myAnim.GetBool("IsSkillShot") && PlayerStat.Instance.CurMP >= 30.0f)
+        if(!myAnim.GetBool("IsSkillShot") && GameData.Instance.CurMP >= 30.0f)
         {
             if(Detect.Monster.Count != 0)
             { 
-                PlayerStat.Instance.CurMP -= 30.0f;
+                GameData.Instance.CurMP -= 30.0f;
                 myAnim.SetTrigger("SkillShot");
                 CheckMonster();
             }
             else
             {
-                PlayerStat.Instance.CurMP -= 30.0f;
+                GameData.Instance.CurMP -= 30.0f;
                 myAnim.SetTrigger("SkillShot");
 
             }

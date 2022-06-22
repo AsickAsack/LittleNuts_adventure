@@ -12,9 +12,9 @@ public class StatPopup : MonoBehaviour
 
     void Update()
     {
-        HP.value = PlayerStat.Instance.CurHP / PlayerStat.Instance.MaxHP;
-        MP.value = PlayerStat.Instance.CurMP / PlayerStat.Instance.MaxMP;
-        SP.value = PlayerStat.Instance.CurSP / PlayerStat.Instance.MaxSP;
-        EXP.fillAmount = PlayerStat.Instance.CurEXP / PlayerStat.Instance.MaxEXP;
+        HP.value = GameData.Instance.CurHP / GameData.Instance.MaxHP;
+        MP.value = GameData.Instance.CurMP / GameData.Instance.MaxMP;
+        SP.value = GameData.Instance.CurSP / GameData.Instance.MaxSP;
+        EXP.fillAmount = GameData.Instance.CurEXP / GameData.Instance.MaxEXP;
     }
 }
