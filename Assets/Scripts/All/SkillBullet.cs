@@ -6,9 +6,24 @@ public class SkillBullet : MonoBehaviour
 {
     
 
-    private void Update()
+
+
+    public void Shot()
     {
-        this.transform.Translate(Vector3.up * Time.deltaTime * 20.0f, Space.Self);
+        StartCoroutine(TargetMonster());
+    }
+
+    IEnumerator TargetMonster()
+    {
+        float BulletTime = 0.0f;
+        while (BulletTime < 20.0f)
+        {
+            BulletTime += Time.deltaTime;
+            this.transform.Translate(Vector3.up * Time.deltaTime * 20.0f, Space.Self);
+
+            yield return null;
+        }
+        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
