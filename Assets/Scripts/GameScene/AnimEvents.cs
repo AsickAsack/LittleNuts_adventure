@@ -26,7 +26,7 @@ public class AnimEvents : MonoBehaviour
 
     public void TrrigerShot()
     {
-        if (Detect.Monster.Count != 0)
+        if (Detect.Enemy.Count != 0)
         {
             myAnim.SetTrigger("Shot");
             CheckMonster();
@@ -48,7 +48,7 @@ public class AnimEvents : MonoBehaviour
     {
         if(!myAnim.GetBool("IsSkillShot") && GameData.Instance.CurMP >= 30.0f)
         {
-            if(Detect.Monster.Count != 0)
+            if(Detect.Enemy.Count != 0)
             { 
                 GameData.Instance.CurMP -= 30.0f;
                 myAnim.SetTrigger("SkillShot");
@@ -96,15 +96,15 @@ public class AnimEvents : MonoBehaviour
     public void CheckMonster()
     {
        
-            NearMonster = Detect.Monster[0];
+            NearMonster = Detect.Enemy[0];
             float minDist = Vector3.Distance(NearMonster.transform.position, this.transform.position);
 
-            for (int i = 1; i < Detect.Monster.Count;i++)
+            for (int i = 1; i < Detect.Enemy.Count;i++)
             {
-                if(minDist > Vector3.Distance(Detect.Monster[i].transform.position, this.transform.position))
+                if(minDist > Vector3.Distance(Detect.Enemy[i].transform.position, this.transform.position))
                 {
-                    minDist = Vector3.Distance(Detect.Monster[i].transform.position, this.transform.position);
-                    NearMonster = Detect.Monster[i];
+                    minDist = Vector3.Distance(Detect.Enemy[i].transform.position, this.transform.position);
+                    NearMonster = Detect.Enemy[i];
 
                     if (minDist <= 2.5f)
                         break;

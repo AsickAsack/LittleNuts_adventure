@@ -12,9 +12,9 @@ public class LaserBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer != LayerMask.NameToLayer("Player"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
-            other.GetComponent<Monster>()?.HitColor();
+            other.GetComponent<BattleSystem>()?.OnDamage(30.0f);
             Destroy(this.gameObject);
             Debug.Log("ºÎ¼­Áü");
             

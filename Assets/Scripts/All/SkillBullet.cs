@@ -35,7 +35,7 @@ public class SkillBullet : MonoBehaviour
             colls = Physics.OverlapSphere(this.transform.position, 1f,1<<LayerMask.NameToLayer("Monster"));
             foreach(Collider coll in colls)
             {
-                coll.GetComponent<Monster>()?.HitColor();
+                coll.GetComponent<BattleSystem>()?.OnDamage(30.0f); //atk넣어야함
                 coll.GetComponent<Rigidbody>().AddExplosionForce(300,this.transform.position, 10f);
             }
             

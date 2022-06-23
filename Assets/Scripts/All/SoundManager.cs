@@ -62,7 +62,7 @@ public class SoundManager : MonoBehaviour
         set
         {
             _BgmVolum = value;
-            _BgmAudio.volume = _BgmVolum;
+            BgmAudio.volume = _BgmVolum;
         }
     }
 
@@ -95,22 +95,13 @@ public class SoundManager : MonoBehaviour
     }
     
     //이펙트 오디오 소스를 리스트에 넣어줄 함수
-    public void AddEffectSource(AudioSource myAudio)
-    {
-        EffectSource.Add(myAudio);
-    }
-
+    public void AddEffectSource(AudioSource myAudio)=> EffectSource.Add(myAudio);
+         
     //이펙트 오디오 소스를 리스트에서 삭제시킬 함수
-    public void DeleteEffectSource(AudioSource myAudio)
-    {
-        EffectSource.Remove(myAudio);
-    }
+    public void DeleteEffectSource(AudioSource myAudio) => EffectSource.Remove(myAudio);
 
     //씬을 이동하거나 할 때 클리어 시킬 함수
-    public void ClearEffectSource()
-    {
-        EffectSource.Clear();
-    }
+    public void ClearEffectSource() => EffectSource.Clear();
 
     //일괄적으로 리스트에 있는 이펙트소스 볼륨을 바꾸는 함수
     public void ChangeEffectVolume(float V)
