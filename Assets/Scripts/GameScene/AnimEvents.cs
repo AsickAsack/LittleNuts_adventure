@@ -99,9 +99,9 @@ public class AnimEvents : MonoBehaviour
             NearMonster = Detect.Enemy[0];
             float minDist = Vector3.Distance(NearMonster.transform.position, this.transform.position);
 
-            for (int i = 1; i < Detect.Enemy.Count;i++)
+            for (int i = 0; i < Detect.Enemy.Count;i++)
             {
-                if(minDist > Vector3.Distance(Detect.Enemy[i].transform.position, this.transform.position))
+                if (minDist > Vector3.Distance(Detect.Enemy[i].transform.position, this.transform.position))
                 {
                     minDist = Vector3.Distance(Detect.Enemy[i].transform.position, this.transform.position);
                     NearMonster = Detect.Enemy[i];
@@ -146,5 +146,24 @@ public class AnimEvents : MonoBehaviour
             yield return null;
         }
     }
+
+    public void Roll()
+    {
+        if(!myAnim.GetBool("IsSkillShot") && !myAnim.GetBool("IsFly") && !myAnim.GetBool("IsRoll"))
+        { 
+            myAnim.SetTrigger("Roll");
+            StartCoroutine(Rolling());
+        }
+    }
    
+    IEnumerator Rolling()
+    {
+        do 
+        { 
+            myChar.transform.position += this.transform.forward * 3.0f * Time.deltaTime;
+            yield return null;
+        }
+        while (myAnim.GetBool("IsRoll"));
+                 
+    }
 }

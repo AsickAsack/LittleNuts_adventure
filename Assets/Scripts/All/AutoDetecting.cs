@@ -7,16 +7,19 @@ public class AutoDetecting : MonoBehaviour
     public List<GameObject> Enemy;
     public LayerMask EnemyMask;
     public SphereCollider myColl;
+    
 
 
+    public void RemoveEnemy(GameObject DeathObject)
+    {
+        Enemy.Remove(DeathObject);
+    }
 
 
     public void ChangeRange(float x)
     {
         myColl.radius = x;
     }
-
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,14 +30,14 @@ public class AutoDetecting : MonoBehaviour
         }
     }
 
+
     private void OnTriggerExit(Collider other)
     {
         if (EnemyMask == 1 << other.gameObject.layer)
         {
-            if (Enemy.Find(x => x.gameObject == other.gameObject))
-            {
+           
                 Enemy.Remove(other.gameObject);
-            }
+            
         }
     }
 }

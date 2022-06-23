@@ -13,7 +13,7 @@ public class LittleNut : Character
     private void Update()
     {
 
-        if (!myAnim.GetBool("IsSkillShot"))
+        if (!myAnim.GetBool("IsSkillShot")&& !myAnim.GetBool("IsRoll"))
         {
 
             if (myJoystic.isDrag)

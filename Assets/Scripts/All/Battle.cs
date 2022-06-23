@@ -8,6 +8,16 @@ public interface BattleSystem
     void OnDamage(float Damage);
 }
 
-public class Battle : MonoBehaviour
+public class Battle : MonoBehaviour, BattleSystem
 {
+    public void OnAttack(float Damage)
+    {
+        //
+    }
+
+    public void OnDamage(float Damage)
+    {
+        this.GetComponent<Animator>().SetTrigger("Hit");
+        GameData.Instance.CurHP -= Damage; //방어력도 빼야함
+    }
 }

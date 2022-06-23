@@ -13,6 +13,7 @@ public class MonsterStat : ScriptableObject
     [SerializeField]public MonsterType MonsterType;
     [SerializeField]public float MaxHP;
     [SerializeField]public float HP;
+    [SerializeField]public float EXP;
     [SerializeField]public float Speed;
     [SerializeField]public float ATK;
     [SerializeField]public float DEF;

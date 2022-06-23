@@ -8,10 +8,7 @@ public class Mole : Monster
     [SerializeField]private GameObject BombEffect;
 
 
-    private void Update()
-    {
-        StateProcess();
-    }
+
 
 
     public override void Battle()
@@ -33,15 +30,20 @@ public class Mole : Monster
     {
         if(mystate == State.Battle && collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            BombEffect.SetActive(true);
-            //Destroy(this.gameObject);
+            Instantiate(BombEffect, this.transform.position, Quaternion.identity);
+            collision.gameObject.GetComponentInChildren<BattleSystem>()?.OnDamage(myStat.ATK);
+            ChangeState(State.Death);
+            Destroy(this.gameObject);
+            
         }
     }
 
 
+
     public override void Death()
     {
-        //
+        Instantiate(BombEffect, this.transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
     }
 
     public override void Move()
@@ -60,5 +62,7 @@ public class Mole : Monster
     public override void OnDamage(float Damage)
     {
         StartCoroutine(HitColor(mat));
+        myStat.HP -= Damage-myStat.DEF;
+        Debug.Log(myStat.HP);
     }
 }

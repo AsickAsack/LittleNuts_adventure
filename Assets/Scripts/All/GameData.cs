@@ -33,6 +33,7 @@ public class GameData : MonoBehaviour
 
 
     #region 플레이어 스텟
+    public int Level = 1;
     private float _CurHP=100;
     public float CurHP
     {
@@ -78,7 +79,16 @@ public class GameData : MonoBehaviour
     public float CurEXP
     {
         get => _CurEXP;
-        set => _CurEXP = value;
+        set
+        {
+            _CurEXP = value;
+            if(_CurEXP > _MaxEXP)
+            {
+                _CurEXP = 0.0f;
+                Level += 1;
+                // 최대 EXP어떻게할지 _MaxEXP = 
+            }    
+        }
     }
     private float _MaxEXP=100;
     public float MaxEXP
@@ -86,6 +96,7 @@ public class GameData : MonoBehaviour
         get => _MaxEXP;
         set => _MaxEXP = value;
     }
+
     #endregion
 
 
