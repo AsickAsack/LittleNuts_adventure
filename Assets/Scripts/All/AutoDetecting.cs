@@ -10,12 +10,6 @@ public class AutoDetecting : MonoBehaviour
     
 
 
-    public void RemoveEnemy(GameObject DeathObject)
-    {
-        Enemy.Remove(DeathObject);
-    }
-
-
     public void ChangeRange(float x)
     {
         myColl.radius = x;

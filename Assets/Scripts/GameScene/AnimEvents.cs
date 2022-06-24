@@ -166,4 +166,8 @@ public class AnimEvents : MonoBehaviour
         while (myAnim.GetBool("IsRoll"));
                  
     }
+
+
+
+
 }

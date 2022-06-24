@@ -15,6 +15,7 @@ MonoBehaviour:
   MonsterType: 0
   MaxHP: 100
   HP: 100
+  EXP: 20
   Speed: 3
   ATK: 30
   DEF: 15

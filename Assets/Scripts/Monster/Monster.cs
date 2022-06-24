@@ -13,6 +13,7 @@ public struct MonsStat
     public float Drop_Rate;
     public float EXP;
 
+    //스크립터블 데이터를 MyStat으로 옮기는 함수
     public void init(float MaxHP, float HP, float Speed, float ATK, float DEF, float AttackRange, float Drop_Rate, float EXP)
     {
         this.MaxHP = MaxHP;
@@ -27,25 +28,44 @@ public struct MonsStat
     }
 }
 
-
-
 //몬스터별로 상속받을 부모 클래스
 public abstract class Monster : MonoBehaviour, BattleSystem
 {
     //스크립터블 오브젝트
     [SerializeField] protected MonsterStat Mon = null;
+    //플레이어 감지 스크립트
     [SerializeField] protected AutoDetecting Detect = null;
-    protected Material mat;
-    private GameObject Player;
+
     
+    protected Material mat;
+    protected GameObject Player;
+    private Animator _myAnim;
+    protected Animator myAnim
+    {
+        get
+        {
+            _myAnim = GetComponent<Animator>();
+            return _myAnim;
+        }
+    }
 
 
+    //죽었을때 이펙트 
+    [SerializeField] protected GameObject BombEffect;
+
+    //패트롤 관련 변수
+    protected Vector3 Dir = Vector3.zero;
+    protected float PatrolTime=0.0f;
+
+    //자식클래스에서 꼭 구현해야할 추상함수들
     public abstract void Move();
     public abstract void Battle();
     public abstract void Death();
-    public abstract void OnAttack(float damage);
+    public abstract void ChangeState(State s);
+    public abstract void OnAttack();
     public abstract void OnDamage(float damage);
-
+    
+    //유한상태기계 열거자 설정
     public enum State
     {
        None, Create, Common , Battle , Death
@@ -57,51 +77,31 @@ public abstract class Monster : MonoBehaviour, BattleSystem
     private void Awake()
     {
         Player = GameObject.Find("LittleNut");
+        mat = this.GetComponentInChildren<SkinnedMeshRenderer>().material;
     }
 
+    //시작하면 Create상태로 바꿔줌
     private void Start()
     {
-        myStat.init(Mon.MaxHP, Mon.HP, Mon.Speed, Mon.ATK, Mon.DEF, Mon.AttackRange, Mon.Drop_Rate,Mon.EXP);
         ChangeState(State.Create);
     }
 
+    //정상적으로 Create 상태가 됐을때 실행할 함수 
+    public void Create()
+    {
+        myStat.init(Mon.MaxHP, Mon.HP, Mon.Speed, Mon.ATK, Mon.DEF, Mon.AttackRange, Mon.Drop_Rate, Mon.EXP);
+        SoundManager.Instance.AddEffectSource(this.GetComponent<AudioSource>());
+        SetPatrolDir();
+        ChangeState(State.Common);
+    }
+
+
     private void Update()
     {
+        //상태별로 항상 실행시킬 프로세스
         StateProcess();
-        if(myStat.HP < 0.0f)
-        {
-            ChangeState(State.Death);
-        }    
-    }
-
-    public void ChangeState(State s)
-    {
-        if (mystate == s) return;
-
-        mystate = s;
-
-        switch(s)
-        {
-            case State.Create:
-                mat = this.GetComponentInChildren<SkinnedMeshRenderer>().material;
-                SoundManager.Instance.AddEffectSource(this.GetComponent<AudioSource>());
-                ChangeState(State.Common);
-                break;
-            case State.Common:
-                
-                break;
-            case State.Battle:
-                
-                break;
-            case State.Death:
-
-                SoundManager.Instance.DeleteEffectSource(this.GetComponent<AudioSource>());
-                Player.GetComponentInChildren<AutoDetecting>().RemoveEnemy(this.gameObject);
-                GameData.Instance.CurHP += myStat.EXP;
-                Death();
-                break;
-        }
-    }
+       
+    }  
 
     protected void StateProcess()
     {
@@ -109,26 +109,35 @@ public abstract class Monster : MonoBehaviour, BattleSystem
         {
             case State.Create:
                 break;
+
             case State.Common:
                 Move();
-                         
                 break;
+
             case State.Battle:
                 Battle();
-                if (Detect.Enemy.Count == 0)
-                {
-                    ChangeState(State.Common);
-                }
                 break;
+
             case State.Death:
                 
                 break;
         }
+
+        if (myStat.HP < 0.0f)
+        {
+            ChangeState(State.Death);
+        }
     }
 
 
+    //Common 상태일때 움직일 방향 세팅
+    protected void SetPatrolDir()
+    {
+        PatrolTime = 0.0f;
+        Dir = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
+    }
 
-
+    //맞았을때 색깔 효과
     protected IEnumerator HitColor(Material mat)
     {
         mat.color = Color.red;
