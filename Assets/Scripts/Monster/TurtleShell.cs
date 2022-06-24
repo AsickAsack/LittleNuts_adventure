@@ -39,7 +39,8 @@ public class TurtleShell : Monster
         //플레이어를 감지하면 따라다님
         if (Detect.Enemy.Count != 0)
         {
-            Dir = Detect.Enemy[0].transform.position - this.transform.position;
+            Dir = new Vector3(Detect.Enemy[0].transform.position.x, 0.0f ,Detect.Enemy[0].transform.position.z) 
+                - this.transform.position;
 
             if(Vector3.Distance(Detect.Enemy[0].transform.position,this.transform.position) < 1f)
             {
@@ -76,16 +77,6 @@ public class TurtleShell : Monster
         else
         {
             ChangeState(State.Common);
-        }
-    }
-
-    //배틀상태에서 플레이어와 부딪히면 터지고 데미지를 줌 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (mystate == State.Battle && collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            
-
         }
     }
 
@@ -137,9 +128,10 @@ public class TurtleShell : Monster
         PatrolTime = 0.0f;
         StartCoroutine(HitColor(mat));
         myAnim.SetTrigger("GetHit");
-        Dir = Player.transform.position-this.transform.position;
-        myStat.Speed = 6f;
+        Dir = new Vector3(Player.transform.position.x, 0.0f, Player.transform.position.z) - this.transform.position;
         myStat.HP -= Damage - myStat.DEF;
+        if(mystate == State.Common)
+            myStat.Speed = 6f;
     }
 
     

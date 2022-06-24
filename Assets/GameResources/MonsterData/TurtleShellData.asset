@@ -16,7 +16,7 @@ MonoBehaviour:
   MaxHP: 100
   HP: 100
   EXP: 30
-  Speed: 1
+  Speed: 2
   ATK: 30
   DEF: 10
   AttackRange: 5

@@ -18,7 +18,7 @@ public class Mole : Monster
                 Create();
                 break;
             case State.Common:
-                SetPatrolDir();
+                //SetPatrolDir();
                 break;
             case State.Battle:
                 myStat.Speed = Mon.Speed;
@@ -36,7 +36,8 @@ public class Mole : Monster
         //플레이어를 감지하면 따라다님
         if(Detect.Enemy.Count != 0)
         {
-            Dir = Detect.Enemy[0].transform.position - this.transform.position;
+            Dir = new Vector3(Detect.Enemy[0].transform.position.x, 0.0f, Detect.Enemy[0].transform.position.z)
+                - this.transform.position;
             this.transform.position+= Dir.normalized * Time.deltaTime * myStat.Speed;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(Dir), Time.deltaTime * 15.0f);
         }
@@ -77,7 +78,7 @@ public class Mole : Monster
         }
 
         //랜덤위치로 계속 이동함
-        this.transform.position += Dir.normalized * Time.deltaTime * (myStat.Speed *0.25f);
+        this.transform.position += Dir.normalized * Time.deltaTime * (myStat.Speed *0.2f);
         
         //플레이어가 감지되면 Battle 상태로 바뀜
         if (Detect.Enemy.Count != 0)
@@ -103,8 +104,12 @@ public class Mole : Monster
     //데미지 입었을때
     public override void OnDamage(float Damage)
     {
+        PatrolTime = 0.0f;
         StartCoroutine(HitColor(mat));
+        Dir = new Vector3(Player.transform.position.x, 0.0f, Player.transform.position.z) - this.transform.position;
         myStat.HP -= Damage - myStat.DEF;
+        if (mystate == State.Common)
+            myStat.Speed = 10f;
     }
 
     //두더지는 OnAttack 필요없음
