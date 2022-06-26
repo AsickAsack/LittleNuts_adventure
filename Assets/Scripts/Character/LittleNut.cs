@@ -6,7 +6,6 @@ public class LittleNut : Character
 {
     public JoySticMove myJoystic;
     public GameObject myCharacter;
-    public float MoveSpeed = 30.0f;
     public float limit = 0.0f;
     public GameObject test;
 
@@ -32,7 +31,7 @@ public class LittleNut : Character
 
             //this.transform.position += dir * Time.deltaTime * MoveSpeed;
 
-            myRigid.MovePosition(transform.position + dir * Time.deltaTime * MoveSpeed);
+            myRigid.MovePosition(transform.position + dir * Time.deltaTime * GameData.Instance.MoveSpeed);
 
 
             if (!(myJoystic.JoysticDir.x == 0 && myJoystic.JoysticDir.y == 0) && myJoystic.JoysticDir != Vector3.zero && !myAnim.GetBool("IsShot"))

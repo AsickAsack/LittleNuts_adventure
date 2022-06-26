@@ -40,14 +40,68 @@ public class GameData : MonoBehaviour
 
 
     #region ÇÃ·¹ÀÌ¾î ½ºÅÝ
-    public int Level = 1;
-    private float _CurHP=100;
+
+    private int _Level = 1;
+    public int Level
+    {
+        get => _Level;
+        set
+        {
+            _Level = value;
+            StatPoint += 3;
+            SkillPoint += 3;
+            //¸Æ½º HP,MP,SP¾÷
+        }
+
+    }
+    public int StatPoint = 0;
+    public int SkillPoint = 0;
+    private int _ATK = 10;
+    public int ATK
+    {
+        get
+        {
+            _ATK = _ATK + ATK_Point;
+            return _ATK;
+        }
+
+        set => _ATK = value;
+    }
+
+    private int _DEF = 10;
+    public int DEF
+    {
+        get
+        {
+            _DEF = _DEF + DEF_Point;
+            return _DEF;
+        }
+
+        set => _DEF = value;
+    }
+    private int _MoveSpeed = 30;
+    public int MoveSpeed
+    {
+        get
+        {
+            _MoveSpeed = _MoveSpeed + Speed_Point;
+            return _MoveSpeed;
+        }
+
+        set => _MoveSpeed = value;
+    }
+    public int ATK_Point = 0;
+    public int DEF_Point = 0;
+    public int Speed_Point = 0;
+ 
+
+    private float _CurHP=200;
     public float CurHP
     {
         get => _CurHP;
         set => _CurHP = value;
     }
-    private float _MaxHP=80;
+    private float _MaxHP=200;
     public float MaxHP
     {
         get => _MaxHP;
@@ -65,7 +119,7 @@ public class GameData : MonoBehaviour
         get => _MaxMP;
         set => _MaxMP = value;
     }
-    private float _CurSP=70;
+    private float _CurSP=100;
     public float CurSP
     {
         get => _CurSP;
@@ -97,12 +151,15 @@ public class GameData : MonoBehaviour
             }    
         }
     }
-    private float _MaxEXP=100;
+    private float _MaxEXP = 100;
     public float MaxEXP
     {
         get => _MaxEXP;
         set => _MaxEXP = value;
     }
+
+
+
 
     #endregion
 

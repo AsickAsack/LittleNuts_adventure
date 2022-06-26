@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DogNPC : MonoBehaviour
 {
@@ -70,6 +71,7 @@ public class DogNPC : MonoBehaviour
         
         NewCamera.SetActive(true);
         StartBtn.gameObject.SetActive(false);
+    
 
     }
 
