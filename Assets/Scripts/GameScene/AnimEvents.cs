@@ -159,8 +159,8 @@ public class AnimEvents : MonoBehaviour
     IEnumerator Rolling()
     {
         do 
-        { 
-            myChar.transform.position += this.transform.forward * 3.0f * Time.deltaTime;
+        {
+            myChar.GetComponent<Rigidbody>().MovePosition(myChar.transform.position + this.transform.forward * 5.0f * Time.deltaTime);
             yield return null;
         }
         while (myAnim.GetBool("IsRoll"));

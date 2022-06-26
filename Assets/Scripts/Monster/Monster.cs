@@ -16,15 +16,15 @@ public struct MonsStat
     //스크립터블 데이터를 MyStat으로 옮기는 함수
     public void init(float MaxHP, float HP, float Speed, float ATK, float DEF, float AttackRange, float Drop_Rate, float EXP)
     {
-        this.MaxHP = MaxHP;
-        this.HP = HP;
-        this.Speed = Speed;
-        this.ATK = ATK;
-        this.DEF = DEF;
-        this.AttackRange = AttackRange;
-        this.Drop_Rate = Drop_Rate;
-        this.EXP = EXP;
-
+        this.MaxHP = MaxHP * (int)GameData.Instance.difficulty;
+        this.HP = HP * (int)GameData.Instance.difficulty; 
+        this.Speed = Speed * (int)GameData.Instance.difficulty; 
+        this.ATK = ATK * (int)GameData.Instance.difficulty; 
+        this.DEF = DEF * (int)GameData.Instance.difficulty; 
+        this.AttackRange = AttackRange * (int)GameData.Instance.difficulty; 
+        this.Drop_Rate = Drop_Rate * (int)GameData.Instance.difficulty; 
+        this.EXP = EXP * (int)GameData.Instance.difficulty; 
+        //나중에 수정하기
     }
 }
 

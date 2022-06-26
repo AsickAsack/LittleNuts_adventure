@@ -31,6 +31,13 @@ public class GameData : MonoBehaviour
     }
     #endregion
 
+    public enum Difficulty
+    {
+        Normal=1,Hard,Insane
+    }
+
+    public Difficulty difficulty = Difficulty.Normal;
+
 
     #region 플레이어 스텟
     public int Level = 1;
@@ -99,7 +106,7 @@ public class GameData : MonoBehaviour
 
     #endregion
 
-
+    public bool InBaseCamp = true;
     public float BgmVolume = 0.5f;
     public float EffectVolume = 0.5f;
 }

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76268d9a3ead22641a4e7d7b0b6a1fe6, type: 3}
   m_Name: TurtleShellData
   m_EditorClassIdentifier: 
-  MonsterType: 0
+  MonsterType: 1
   MaxHP: 100
   HP: 100
   EXP: 30
   Speed: 2
   ATK: 30
   DEF: 10
-  AttackRange: 5
+  AttackRange: 1
   Drop_Rate: 10

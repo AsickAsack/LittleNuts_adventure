@@ -42,7 +42,7 @@ public class TurtleShell : Monster
             Dir = new Vector3(Detect.Enemy[0].transform.position.x, 0.0f ,Detect.Enemy[0].transform.position.z) 
                 - this.transform.position;
 
-            if(Vector3.Distance(Detect.Enemy[0].transform.position,this.transform.position) < 1f)
+            if(Vector3.Distance(Detect.Enemy[0].transform.position,this.transform.position) < myStat.AttackRange)
             {
                 myAnim.SetBool("IsWalk", false);
                 myAnim.SetBool("IsBattle",true);
