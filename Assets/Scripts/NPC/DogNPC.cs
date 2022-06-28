@@ -9,13 +9,14 @@ public class DogNPC : MonoBehaviour
     public GameObject StartBtn;
     public GameObject NewCamera;
     public GameObject NPC;
-
     private Quaternion myRot;
-    
+    Coroutine EndCo = null;
+
 
     private void Start()
     {
         myRot = NPC.transform.rotation;
+        SoundManager.Instance.AddEffectSource(GetComponentInParent<AudioSource>());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,6 +24,8 @@ public class DogNPC : MonoBehaviour
         if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
 
+            if (EndCo != null)
+                StopCoroutine(EndCo);
             StartBtn.gameObject.SetActive(true);
             
         }
@@ -44,8 +47,13 @@ public class DogNPC : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-
-            StartCoroutine(OriginRot());
+            if(EndCo == null)
+            EndCo = StartCoroutine(OriginRot());
+            else
+            {
+                StopCoroutine(EndCo);
+                EndCo = StartCoroutine(OriginRot());
+            }
             StartBtn.gameObject.SetActive(false);
             
 

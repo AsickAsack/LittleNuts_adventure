@@ -12,11 +12,12 @@ public class BaseMap : MonoBehaviour
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            if(!GameData.Instance.InBaseCamp)
+            if(!GameData.Instance.playerdata.InBaseCamp)
             { 
                 MoveMapPanel.transform.GetChild(0).GetComponent<Text>().text = "º£ÀÌ½º Ä·ÇÁ";
                 MoveMapPanel.gameObject.SetActive(true);
-                GameData.Instance.InBaseCamp = !GameData.Instance.InBaseCamp;
+                GameData.Instance.playerdata.InBaseCamp = !GameData.Instance.playerdata.InBaseCamp;
+                GameData.Instance.playerdata.SaveMap = "º£ÀÌ½º Ä·ÇÁ";
             }
         }
     }

@@ -27,7 +27,7 @@ public class Battle : MonoBehaviour, BattleSystem
     {
         this.GetComponent<Animator>().SetTrigger("Hit");
         StartCoroutine(HitColor(mat));
-        GameData.Instance.CurHP -= Damage-GameData.Instance.DEF; 
+        GameData.Instance.playerdata.CurHP -= Damage-GameData.Instance.playerdata.DEF; 
     }
 
 

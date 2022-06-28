@@ -96,7 +96,7 @@ public class Mole : Monster
         if (Player.GetComponentInChildren<AutoDetecting>().Enemy.Find(x => x.gameObject == this.gameObject))
             Player.GetComponentInChildren<AutoDetecting>().Enemy.Remove(this.gameObject);
 
-        GameData.Instance.CurEXP += myStat.EXP;
+        GameData.Instance.playerdata.CurEXP += myStat.EXP;
         Destroy(this.gameObject);
 
     }

@@ -14,21 +14,21 @@ public class StatCanavs : MonoBehaviour
     //스텟올리는 버튼  클릭
     public void StatUp(int index)
     {
-        if(GameData.Instance.StatPoint > 0)
+        if(GameData.Instance.playerdata.StatPoint > 0)
         {
             switch(index)
             {
                 case 0:
-                    GameData.Instance.ATK += 1;
+                    GameData.Instance.playerdata.ATK += 1;
                     break;
                 case 1:
-                    GameData.Instance.DEF += 1;
+                    GameData.Instance.playerdata.DEF += 1;
                     break;
                 case 2:
-                    GameData.Instance.MoveSpeed += 1;
+                    GameData.Instance.playerdata.MoveSpeed += 1;
                     break;
             }
-            GameData.Instance.StatPoint -= 1;
+            GameData.Instance.playerdata.StatPoint -= 1;
             initStat();
         }
         else
@@ -43,12 +43,12 @@ public class StatCanavs : MonoBehaviour
     public void ResetStat()
     { 
         //팝업창 띄우고 확인 누르면
-        if(GameData.Instance.Level > 1)
+        if(GameData.Instance.playerdata.Level > 1)
         { 
-            GameData.Instance.ATK_Point = 0;
-            GameData.Instance.DEF_Point = 0;
-            GameData.Instance.Speed_Point = 0;
-            GameData.Instance.StatPoint = (GameData.Instance.Level * 3) -3;
+            GameData.Instance.playerdata.ATK_Point = 0;
+            GameData.Instance.playerdata.DEF_Point = 0;
+            GameData.Instance.playerdata.Speed_Point = 0;
+            GameData.Instance.playerdata.StatPoint = (GameData.Instance.playerdata.Level * 3) -3;
             initStat();
         }
         
@@ -57,10 +57,10 @@ public class StatCanavs : MonoBehaviour
     //스텟 텍스트 새로고침
     public void initStat()
     {
-        ATK_tx.text = GameData.Instance.ATK_Point.ToString();
-        DEF_tx.text = GameData.Instance.DEF_Point.ToString();
-        SPEED_tx.text = GameData.Instance.Speed_Point.ToString();
-        AllStat_tx.text = GameData.Instance.StatPoint.ToString();
+        ATK_tx.text = GameData.Instance.playerdata.ATK.ToString();
+        DEF_tx.text = GameData.Instance.playerdata.DEF.ToString();
+        SPEED_tx.text = GameData.Instance.playerdata.MoveSpeed.ToString();
+        AllStat_tx.text = GameData.Instance.playerdata.StatPoint.ToString();
 
     }
 
