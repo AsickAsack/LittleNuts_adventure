@@ -36,6 +36,7 @@ public class GameData : MonoBehaviour
 
     public PlayerData playerdata = new PlayerData();
     public SaveData savedata = new SaveData();
+    public Queue<string> EventString = new Queue<string>();
 
     private void Update()
     {
@@ -104,7 +105,7 @@ public class GameData : MonoBehaviour
     {
         public enum Difficulty
         {
-            Normal = 1, Hard, Insane
+            Normal = 0, Hard, Insane
         }
 
         public Difficulty difficulty = Difficulty.Normal;
@@ -234,7 +235,7 @@ public class GameData : MonoBehaviour
             set => _MaxEXP = value;
         }
 
-
+        public int money = 0;
 
 
 

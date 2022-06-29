@@ -8,11 +8,14 @@ public class AnimEvents : MonoBehaviour
     public GameObject bullet;
     public GameObject Skillbullet;
     public Transform myMuzzle;
+    public Transform BulletRot;
     public Transform Waist;
     public AutoDetecting Detect;
     public Transform myChar;
 
+
     private Quaternion LookMonsterRot;
+    private Vector3 NearMonsterDir = Vector3.zero;
     private float OriginRotX = 0.0f;
     private Coroutine myCo = null;
     private Animator myAnim = null;
@@ -24,8 +27,11 @@ public class AnimEvents : MonoBehaviour
         myAnim = this.GetComponent<Animator>();
     }
 
+    //기본 공격 트리거
     public void TrrigerShot()
     {
+       
+        
         if (Detect.Enemy.Count != 0)
         {
             myAnim.SetTrigger("Shot");
@@ -35,15 +41,25 @@ public class AnimEvents : MonoBehaviour
             myAnim.SetTrigger("Shot");
     }
 
-
+    //총알 생성
     public void Shot()
-    {    
-        GameObject obj = Instantiate(bullet, myMuzzle.position, Quaternion.Euler(new Vector3(LookMonsterRot.eulerAngles.x+97f, LookMonsterRot.eulerAngles.y, LookMonsterRot.eulerAngles.z)));
+    {
+        if (Detect.Enemy.Count == 0)
+        {
+            GameObject obj = Instantiate(bullet, myMuzzle.position, BulletRot.rotation);
+            obj.GetComponent<LaserBullet>().ShotBullet(Vector3.forward,Space.Self);
+        }
+        else
+        {
+            GameObject obj = Instantiate(bullet, myMuzzle.position, LookMonsterRot);
+            obj.GetComponent<LaserBullet>().ShotBullet(NearMonsterDir.normalized, Space.World);
+        }
+        this.GetComponentInParent<AudioSource>().PlayOneShot(SoundManager.Instance.myEffectClip[0]);
+
     }
 
-        
 
-
+    //초록색 총알 트리거, mp검사함
     public void TrrigerSkillShot()
     {
         if(!myAnim.GetBool("IsSkillShot") && GameData.Instance.playerdata.CurMP >= 30.0f)
@@ -63,20 +79,28 @@ public class AnimEvents : MonoBehaviour
         }
         else
         {
-            //안되는 bmg
+            //안되는 bmg 넣기
         }
         
     }
 
-
-
+    //스킬 총알 생성 / 캐릭터 넉백
     public void SkillShot()
     {
-        GameObject obj = Instantiate(Skillbullet, myMuzzle.position, Quaternion.Euler(new Vector3(LookMonsterRot.eulerAngles.x + 97f, LookMonsterRot.eulerAngles.y, LookMonsterRot.eulerAngles.z)));
-        obj.GetComponent<SkillBullet>().Shot();
-        this.GetComponentInParent<Rigidbody>().AddForce(-this.transform.forward * 250.0f);
+        if (Detect.Enemy.Count == 0)
+        {
+            GameObject obj = Instantiate(Skillbullet, myMuzzle.position, BulletRot.rotation);
+            obj.GetComponent<SkillBullet>().ShotBullet(Vector3.forward, Space.Self);
+        }
+        else
+        {
+            GameObject obj = Instantiate(Skillbullet, myMuzzle.position, LookMonsterRot);
+            obj.GetComponent<SkillBullet>().ShotBullet(NearMonsterDir.normalized, Space.World);
+        }
+        this.GetComponentInParent<Rigidbody>().AddForce(-this.transform.forward * 150.0f);
     }
 
+    //총 쏘고 나서 허리를 되돌림
     public void ShotEnd()
     {
         IsWaist = false;
@@ -93,6 +117,8 @@ public class AnimEvents : MonoBehaviour
         }
     }
 
+
+    //가장 가까이에 있는 몬스터를 탐색함
     public void CheckMonster()
     {
        
@@ -113,12 +139,12 @@ public class AnimEvents : MonoBehaviour
 
             
             
-            LookMonsterRot = Quaternion.LookRotation(NearMonster.transform.position - this.transform.position);
-
-            
+        
+        NearMonsterDir = NearMonster.transform.position - this.transform.position;
+        LookMonsterRot = Quaternion.LookRotation(NearMonsterDir);
         //if(myChar.position.y+0.6f <= NearMonster.transform.position.y || myChar.position.y - 0.6f >= NearMonster.transform.position.y)
-         
-           IsWaist = true;
+
+        IsWaist = true;
            OriginRotX = Waist.eulerAngles.x;
         
 
@@ -134,7 +160,7 @@ public class AnimEvents : MonoBehaviour
          
     }
 
-
+    //적 방향으로 방향 돌리기
     IEnumerator ChangeRotation(Transform Tr, float TargetRotX, Quaternion TargetRot)
     {
         float shottime = 0.0f;
@@ -147,6 +173,8 @@ public class AnimEvents : MonoBehaviour
         }
     }
 
+
+    //구르기
     public void Roll()
     {
         if(!myAnim.GetBool("IsSkillShot") && !myAnim.GetBool("IsFly") && !myAnim.GetBool("IsRoll"))

@@ -16,14 +16,14 @@ public struct MonsStat
     //스크립터블 데이터를 MyStat으로 옮기는 함수
     public void init(float MaxHP, float HP, float Speed, float ATK, float DEF, float AttackRange, float Drop_Rate, float EXP)
     {
-        this.MaxHP = MaxHP * (int)GameData.Instance.playerdata.difficulty;
-        this.HP = HP * (int)GameData.Instance.playerdata.difficulty; 
-        this.Speed = Speed * (int)GameData.Instance.playerdata.difficulty; 
-        this.ATK = ATK * (int)GameData.Instance.playerdata.difficulty; 
-        this.DEF = DEF * (int)GameData.Instance.playerdata.difficulty; 
-        this.AttackRange = AttackRange * (int)GameData.Instance.playerdata.difficulty; 
-        this.Drop_Rate = Drop_Rate * (int)GameData.Instance.playerdata.difficulty; 
-        this.EXP = EXP * (int)GameData.Instance.playerdata.difficulty; 
+        this.MaxHP = MaxHP * ((int)GameData.Instance.playerdata.difficulty+1);
+        this.HP = HP * ((int)GameData.Instance.playerdata.difficulty+1); 
+        this.Speed = Speed * ((int)GameData.Instance.playerdata.difficulty+1); 
+        this.ATK = ATK * ((int)GameData.Instance.playerdata.difficulty+1); 
+        this.DEF = DEF * ((int)GameData.Instance.playerdata.difficulty+1); 
+        this.AttackRange = AttackRange * ((int)GameData.Instance.playerdata.difficulty+1); 
+        this.Drop_Rate = Drop_Rate * ((int)GameData.Instance.playerdata.difficulty+1); 
+        this.EXP = EXP * ((int)GameData.Instance.playerdata.difficulty+1); 
         //나중에 수정하기
     }
 }
@@ -39,6 +39,7 @@ public abstract class Monster : MonoBehaviour, BattleSystem
     
     protected Material mat;
     protected GameObject Player;
+    
     private Animator _myAnim;
     protected Animator myAnim
     {
@@ -49,6 +50,8 @@ public abstract class Monster : MonoBehaviour, BattleSystem
         }
     }
 
+    [SerializeField] protected GameObject Coin;
+    [SerializeField] protected GameObject[] DropItem;
 
     //죽었을때 이펙트 
     [SerializeField] protected GameObject BombEffect;

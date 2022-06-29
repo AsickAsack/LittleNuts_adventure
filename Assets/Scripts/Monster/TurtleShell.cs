@@ -118,6 +118,12 @@ public class TurtleShell : Monster
             Player.GetComponentInChildren<AutoDetecting>().Enemy.Remove(this.gameObject);
 
         GameData.Instance.playerdata.CurEXP += myStat.EXP;
+
+        GameObject coin = Instantiate(Coin, this.transform.position, Quaternion.identity);
+        GameObject coin2 = Instantiate(Coin, this.transform.position, Quaternion.identity);
+
+        coin.GetComponent<Rigidbody>().AddForce(Vector3.up * 200 + Vector3.right * 100);
+        coin2.GetComponent<Rigidbody>().AddForce(Vector3.up * 200 + Vector3.right * 100);
         Destroy(this.gameObject);
 
     }
@@ -129,7 +135,7 @@ public class TurtleShell : Monster
         StartCoroutine(HitColor(mat));
         myAnim.SetTrigger("GetHit");
         Dir = new Vector3(Player.transform.position.x, 0.0f, Player.transform.position.z) - this.transform.position;
-        myStat.HP -= Damage - myStat.DEF;
+        myStat.HP -= Damage + myStat.DEF;
         if(mystate == State.Common)
             myStat.Speed = 6f;
     }

@@ -107,7 +107,7 @@ public class Mole : Monster
         PatrolTime = 0.0f;
         StartCoroutine(HitColor(mat));
         Dir = new Vector3(Player.transform.position.x, 0.0f, Player.transform.position.z) - this.transform.position;
-        myStat.HP -= Damage - myStat.DEF;
+        myStat.HP -= Damage + myStat.DEF;
         if (mystate == State.Common)
             myStat.Speed = 10f;
     }

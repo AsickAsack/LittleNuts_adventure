@@ -7,9 +7,13 @@ public class LittleNut : Character
     public JoySticMove myJoystic;
     public GameObject myCharacter;
     public float limit = 0.0f;
-    public GameObject test;
 
- 
+    private void Start()
+    {
+        SoundManager.Instance.AddEffectSource(this.GetComponent<AudioSource>());
+    }
+
+
 
     private void Update()
     {

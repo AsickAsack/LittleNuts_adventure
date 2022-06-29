@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class SkillBullet : MonoBehaviour
 {
-    
 
 
 
-    public void Shot()
+
+    public void ShotBullet(Vector3 Target, Space Where)
     {
-        StartCoroutine(TargetMonster());
+        StartCoroutine(ShotTarget(Target, Where));
     }
 
-    IEnumerator TargetMonster()
+    IEnumerator ShotTarget(Vector3 Target, Space Where)
     {
         float BulletTime = 0.0f;
-        while (BulletTime < 20.0f)
+        while (BulletTime < 10.0f)
         {
             BulletTime += Time.deltaTime;
-            this.transform.Translate(Vector3.up * Time.deltaTime * 20.0f, Space.Self);
+            this.transform.Translate(Target * Time.deltaTime * 20.0f, Where);
 
             yield return null;
         }
         Destroy(this.gameObject);
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,13 +36,15 @@ public class SkillBullet : MonoBehaviour
             colls = Physics.OverlapSphere(this.transform.position, 1f,1<<LayerMask.NameToLayer("Monster"));
             foreach(Collider coll in colls)
             {
-                coll.GetComponent<BattleSystem>()?.OnDamage(30.0f); //atk넣어야함
+                coll.GetComponent<BattleSystem>()?.OnDamage(GameData.Instance.playerdata.ATK); //atk넣어야함
                 coll.GetComponent<Rigidbody>().AddExplosionForce(300,this.transform.position, 10f);
             }
-            
-
            Destroy(this.gameObject);
-            Debug.Log("부서짐");
+        }
+        else if (other.gameObject.layer != LayerMask.NameToLayer("PlayerDetect"))
+        {
+
+            Destroy(gameObject);
         }
     }
 }

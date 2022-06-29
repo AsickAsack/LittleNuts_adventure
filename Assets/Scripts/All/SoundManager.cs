@@ -32,10 +32,15 @@ public class SoundManager : MonoBehaviour
 
     #region 오디오클립들
 
-    //public AudioClip 
+    public AudioClip[] myBgmClip;
+    public AudioClip[] myEffectClip;
 
     #endregion
 
+    private void Start()
+    {
+        //SelectBGM();
+    }
 
     #region BGM 사운드 기능
 
@@ -71,6 +76,19 @@ public class SoundManager : MonoBehaviour
         BgmAudio.clip = clip;
         BgmAudio.loop = loop;
         BgmAudio.Play();
+    }
+
+    public void SelectBGM()
+    {
+        switch(GameData.Instance.playerdata.SaveMap)
+        {
+            case "베이스캠프":
+                SetBGM(myBgmClip[1], true);
+                break;
+            case "두더지의 숲":
+                SetBGM(myBgmClip[2], true);
+                break;
+        }
     }
 
     #endregion
