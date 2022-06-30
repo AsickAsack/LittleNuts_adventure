@@ -35,6 +35,9 @@ public class GameSceneManager : MonoBehaviour
     RectTransform EventTextRect = null;
     Vector2 EventText_OrgPos = Vector2.zero;
 
+    [Header("[인벤토리 기능]")]
+    public GameObject[] InvenSelectImage;
+
     //나중에 수정하자.
     #region 난이도 기능
 
@@ -309,4 +312,7 @@ public class GameSceneManager : MonoBehaviour
         SoundManager.Instance.EffectVolume = SoundManager.Instance.EffectSource != null ? EffectSlider.value : SoundManager.Instance.EffectVolume;
         EffectVolume_Text.text = (EffectSlider.value * 100).ToString("N0");
     }
+
+
+
 }

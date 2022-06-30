@@ -37,6 +37,7 @@ public class GameData : MonoBehaviour
     public PlayerData playerdata = new PlayerData();
     public SaveData savedata = new SaveData();
     public Queue<string> EventString = new Queue<string>();
+   
 
     private void Update()
     {
@@ -109,7 +110,7 @@ public class GameData : MonoBehaviour
         }
 
         public Difficulty difficulty = Difficulty.Normal;
-
+        public List<Item> myItems = new List<Item>();
 
         #region 플레이어 스텟
 

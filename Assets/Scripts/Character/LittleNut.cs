@@ -7,6 +7,7 @@ public class LittleNut : Character
     public JoySticMove myJoystic;
     public GameObject myCharacter;
     public float limit = 0.0f;
+    Quaternion v3Rotation = Quaternion.identity;
 
     private void Start()
     {
@@ -29,14 +30,15 @@ public class LittleNut : Character
             else
                 myAnim.SetBool("IsRun", false);
 
-            Quaternion v3Rotation = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
+            
+            v3Rotation = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
 
             Vector3 dir = v3Rotation * new Vector3(myJoystic.JoysticDir.x, 0, myJoystic.JoysticDir.y);
 
             //this.transform.position += dir * Time.deltaTime * MoveSpeed;
 
             myRigid.MovePosition(transform.position + dir * Time.deltaTime * GameData.Instance.playerdata.MoveSpeed);
-
+                
 
             if (!(myJoystic.JoysticDir.x == 0 && myJoystic.JoysticDir.y == 0) && myJoystic.JoysticDir != Vector3.zero && !myAnim.GetBool("IsShot"))
             {

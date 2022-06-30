@@ -19,6 +19,6 @@ MonoBehaviour:
   ATK: 0
   DEF: 0
   Value: 0
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 14e62563269c11443b9c936be93b95f4, type: 3}
   BuyPrice: 0
   SellPrice: 50
