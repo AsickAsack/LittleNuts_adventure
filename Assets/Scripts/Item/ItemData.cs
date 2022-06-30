@@ -14,11 +14,14 @@ public class ItemData : ScriptableObject
 
     public ItemType myType;
     public string ItemName;
+    public string Description;
     public float HP;
     public float ATK;
     public float DEF;
     public float Value;
     public Sprite Image;
+    public int BuyPrice;
+    public int SellPrice;
     public UnityAction myAction;
 
 

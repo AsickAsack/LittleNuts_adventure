@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 1963633238015953234}
   - component: {fileID: 1963633238015953232}
   - component: {fileID: 1963633238015953233}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AutoDetecting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,7 +761,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4516063768286253028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.95, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 2336533019465373218}
@@ -822,6 +822,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mon: {fileID: 11400000, guid: 4092372c62ed79b44b746c9a6ce653a5, type: 2}
   Detect: {fileID: 1963633238015953233}
+  DropItem:
+  - {fileID: 1075143186925054492, guid: 5975e725aac445b4b9ae47207db0fae5, type: 3}
+  - {fileID: 7964573918609248695, guid: be7222c27c5c4cd4198b950a0d809bcb, type: 3}
   BombEffect: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 3}
   mystate: 0
 --- !u!136 &1963633237958379164

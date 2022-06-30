@@ -56,7 +56,7 @@ public class Mole : Monster
             Instantiate(BombEffect, this.transform.position, Quaternion.identity);
             collision.gameObject.GetComponentInChildren<BattleSystem>()?.OnDamage(myStat.ATK);
             ChangeState(State.Death);
-            Destroy(this.gameObject);
+            
             
         }
     }
@@ -87,19 +87,6 @@ public class Mole : Monster
         }
     }
 
-    //죽었을때 
-    public override void Death()
-    {
-        Instantiate(BombEffect, this.transform.position, Quaternion.identity);
-        SoundManager.Instance.DeleteEffectSource(this.GetComponent<AudioSource>());
-
-        if (Player.GetComponentInChildren<AutoDetecting>().Enemy.Find(x => x.gameObject == this.gameObject))
-            Player.GetComponentInChildren<AutoDetecting>().Enemy.Remove(this.gameObject);
-
-        GameData.Instance.playerdata.CurEXP += myStat.EXP;
-        Destroy(this.gameObject);
-
-    }
 
     //데미지 입었을때
     public override void OnDamage(float Damage)

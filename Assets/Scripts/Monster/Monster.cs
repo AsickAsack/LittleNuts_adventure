@@ -50,7 +50,6 @@ public abstract class Monster : MonoBehaviour, BattleSystem
         }
     }
 
-    [SerializeField] protected GameObject Coin;
     [SerializeField] protected GameObject[] DropItem;
 
     //죽었을때 이펙트 
@@ -63,7 +62,6 @@ public abstract class Monster : MonoBehaviour, BattleSystem
     //자식클래스에서 꼭 구현해야할 추상함수들
     public abstract void Move();
     public abstract void Battle();
-    public abstract void Death();
     public abstract void ChangeState(State s);
     public abstract void OnAttack();
     public abstract void OnDamage(float damage);
@@ -149,7 +147,29 @@ public abstract class Monster : MonoBehaviour, BattleSystem
 
     }
 
-   
+    //죽었을때 
+    protected void Death()
+    {
+        Instantiate(BombEffect, this.transform.position, Quaternion.identity);
+        myAnim.SetTrigger("Die");
+
+        SoundManager.Instance.DeleteEffectSource(this.GetComponent<AudioSource>());
+        if (Player.GetComponentInChildren<AutoDetecting>().Enemy.Find(x => x.gameObject == this.gameObject))
+            Player.GetComponentInChildren<AutoDetecting>().Enemy.Remove(this.gameObject);
+
+        GameData.Instance.playerdata.CurEXP += myStat.EXP;
+
+        GameObject DropTem = Instantiate(DropItem[0], this.transform.position, Quaternion.identity);
+        GameObject DropTem2 = Instantiate(DropItem[1], this.transform.position, Quaternion.identity);
+
+        int RandomNum = Random.Range(0, 2);
+        Vector3 RandomVector = RandomNum <= 0 ? Vector3.left : Vector3.right;
+
+        DropTem.GetComponent<Rigidbody>().AddForce(Vector3.up * 200 + RandomVector * 100);
+        DropTem2.GetComponent<Rigidbody>().AddForce(Vector3.up * 200 + RandomVector * 100);
+        Destroy(this.gameObject);
+
+    }
 
 
 }

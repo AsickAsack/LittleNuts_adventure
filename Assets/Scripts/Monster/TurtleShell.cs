@@ -107,26 +107,7 @@ public class TurtleShell : Monster
         }
     }
 
-    //죽었을때 
-    public override void Death()
-    {
-        Instantiate(BombEffect, this.transform.position, Quaternion.identity);
-        myAnim.SetTrigger("Die");
-
-        SoundManager.Instance.DeleteEffectSource(this.GetComponent<AudioSource>());
-        if (Player.GetComponentInChildren<AutoDetecting>().Enemy.Find(x => x.gameObject == this.gameObject))
-            Player.GetComponentInChildren<AutoDetecting>().Enemy.Remove(this.gameObject);
-
-        GameData.Instance.playerdata.CurEXP += myStat.EXP;
-
-        GameObject coin = Instantiate(Coin, this.transform.position, Quaternion.identity);
-        GameObject coin2 = Instantiate(Coin, this.transform.position, Quaternion.identity);
-
-        coin.GetComponent<Rigidbody>().AddForce(Vector3.up * 200 + Vector3.right * 100);
-        coin2.GetComponent<Rigidbody>().AddForce(Vector3.up * 200 + Vector3.right * 100);
-        Destroy(this.gameObject);
-
-    }
+  
 
     //데미지 입었을때
     public override void OnDamage(float Damage)
