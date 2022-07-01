@@ -12,6 +12,11 @@ public class Coin : MonoBehaviour
         myrigid = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        Destroy(gameObject, 30.0f);
+    }
+
 
     void Update()
     {

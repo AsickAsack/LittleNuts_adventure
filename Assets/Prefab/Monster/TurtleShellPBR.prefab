@@ -226,7 +226,12 @@ MonoBehaviour:
   DropItem:
   - {fileID: 1075143186925054492, guid: 5975e725aac445b4b9ae47207db0fae5, type: 3}
   - {fileID: 8178229379412228737, guid: fdf68cdbb9244d845ba72d0a3fd40a88, type: 3}
-  BombEffect: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 3}
+  - {fileID: 7272442011520824690, guid: df2a66328942b0642a33f6335484f317, type: 3}
+  - {fileID: 8249601336549490219, guid: 38084540e9809ce43b35f0ca9c532366, type: 3}
+  - {fileID: 9218383628161895238, guid: 6f87b1e7c62c52c40a1d8a3f5c99c887, type: 3}
+  - {fileID: 65439319123842765, guid: 9d90f3c0ea08ca6489770e23e1bbcee6, type: 3}
+  DamageText: {fileID: 2940886285238319249, guid: 579508ef65b4c5444a0e59424bb05a64, type: 3}
+  BombEffect: {fileID: 100000, guid: 3156817f64ec68948ad6bb26569b9ef5, type: 3}
   mystate: 0
 --- !u!82 &7246696739792439259
 AudioSource:

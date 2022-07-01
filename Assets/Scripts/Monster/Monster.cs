@@ -51,6 +51,8 @@ public abstract class Monster : MonoBehaviour, BattleSystem
     }
 
     [SerializeField] protected GameObject[] DropItem;
+    [SerializeField] protected GameObject DamageText;
+
 
     //Á×¾úÀ»¶§ ÀÌÆåÆ® 
     [SerializeField] protected GameObject BombEffect;
@@ -169,6 +171,15 @@ public abstract class Monster : MonoBehaviour, BattleSystem
         DropTem2.GetComponent<Rigidbody>().AddForce(Vector3.up * 200 + RandomVector * 100);
         Destroy(this.gameObject);
 
+    }
+
+    protected GameObject setDamage(float damage)
+    {
+        GameObject DmText = Instantiate(DamageText, new Vector3(this.transform.position.x, this.transform.position.y+1.0f, this.transform.position.z), Camera.main.transform.rotation);
+        DmText.GetComponent<TextMesh>().text = damage.ToString();
+
+        return DmText;
+        
     }
 
 
