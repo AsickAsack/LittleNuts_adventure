@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d9606252809b943a5936a336080058, type: 3}
+  m_Name: DefenceSphere(gr)
+  m_EditorClassIdentifier: 
+  myType: 1
+  ItemName: "\uCD08\uB85D \uB514\uD39C\uC2A4 \uAD6C"
+  Description: "\uCCB4\uB825\uACFC \uBC29\uC5B4\uB825\uC744 \uC62C\uB824\uC8FC\uB294
+    \uCD08\uB85D\uC0C9 \uAD6C."
+  HP: 300
+  ATK: 0
+  DEF: 20
+  Value: 0
+  Image: {fileID: 21300000, guid: 44a7e13e7fedbe74daaa2fe81e406271, type: 3}
+  BuyPrice: 50000
+  SellPrice: 35000
