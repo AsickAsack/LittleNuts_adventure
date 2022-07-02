@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5782758214623776726}
   - component: {fileID: 8646308986906654911}
   - component: {fileID: 3725379258670187306}
+  - component: {fileID: -5653625817043341697}
   m_Layer: 0
   m_Name: Ice_Gun
   m_TagString: Untagged
@@ -116,6 +117,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.019258596, y: 0.03196336, z: 0.032145116}
   m_Center: {x: -0.00032983255, y: -0.001962463, z: -0.003547825}
+--- !u!114 &-5653625817043341697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5422482956691238403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0a6ef6ee5595f4cb809fa9bf340746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemdata: {fileID: 11400000, guid: 1ee4b4068bd5e0a4b829a09592f58734, type: 2}
 --- !u!1 &6926545491012785098
 GameObject:
   m_ObjectHideFlags: 0

@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 8249601336551177777}
   - component: {fileID: 799258404081679609}
   - component: {fileID: 3820824916066270247}
+  - component: {fileID: -4406817129066652741}
   m_Layer: 0
   m_Name: MpPotion
   m_TagString: Untagged
@@ -195,3 +196,16 @@ CapsuleCollider:
   m_Height: 2.7397094
   m_Direction: 1
   m_Center: {x: -0.0017803609, y: -0.2839061, z: -0.00029456615}
+--- !u!114 &-4406817129066652741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249601336549490219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0a6ef6ee5595f4cb809fa9bf340746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemdata: {fileID: 11400000, guid: b4a6c18e3f1582946a56926fde054b24, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hp_Potion
   m_EditorClassIdentifier: 
   myType: 3
-  ItemName: "MP \uD3EC\uC158"
+  ItemName: "HP \uD3EC\uC158"
   Description: "\uCCB4\uB825\uC744 100 \uD68C\uBCF5\uD574\uC900\uB2E4."
   HP: 0
   ATK: 0

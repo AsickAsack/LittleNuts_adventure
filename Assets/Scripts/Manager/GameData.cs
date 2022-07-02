@@ -112,6 +112,7 @@ public class GameData : MonoBehaviour
         public Difficulty difficulty = Difficulty.Normal;
         public List<Item> myItems = new List<Item>();
 
+
         #region 플레이어 스텟
 
         private int _Level = 1;

@@ -18,6 +18,6 @@ MonoBehaviour:
   EXP: 30
   Speed: 2
   ATK: 30
-  DEF: 10
+  DEF: 15
   AttackRange: 1
   Drop_Rate: 10

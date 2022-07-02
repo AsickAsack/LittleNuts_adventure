@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6338910882821567089}
   - component: {fileID: 3276755857768554226}
   - component: {fileID: 1828321440307455125}
+  - component: {fileID: 8447969840781399242}
   m_Layer: 0
   m_Name: Spacegun
   m_TagString: Untagged
@@ -116,3 +117,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0529404, y: 0.54919034, z: 2.0263584}
   m_Center: {x: 0.20605606, y: 0, z: 0.1286346}
+--- !u!114 &8447969840781399242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546369501060158372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0a6ef6ee5595f4cb809fa9bf340746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemdata: {fileID: 11400000, guid: 06d211e51b596f54bad421144c617aef, type: 2}

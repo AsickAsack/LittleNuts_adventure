@@ -22,7 +22,6 @@ public class ItemData : ScriptableObject
     public Sprite Image;
     public int BuyPrice;
     public int SellPrice;
-    public static int HasItem;
     public UnityAction myAction;
 
 

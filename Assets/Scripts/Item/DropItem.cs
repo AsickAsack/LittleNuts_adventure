@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class DropItem : MonoBehaviour
 {
-    public int UID;
     public ItemData itemdata;
     Rigidbody myrigid = null;
 
@@ -32,10 +31,33 @@ public class DropItem : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             collision.transform.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.myEffectClip[1]);
-            GameData.Instance.EventString.Enqueue(itemdata.ItemName+" È¹µæ!");
-            UID = Random.Range(int.MinValue, int.MaxValue);
-            GameData.Instance.playerdata.myItems.Add(new Item(this.UID, this.itemdata));
+            AddInventory();
+            //³ªÁß¿¡´Â ¿ÀºêÁ§Æ® Ç®¸µÀ¸·Î ¹Ù²Ù±â
             Destroy(gameObject);
         }
+    }
+
+    
+    public void AddInventory()
+    {
+        GameData.Instance.EventString.Enqueue(itemdata.ItemName + " È¹µæ!");
+
+        if (this.itemdata.myType == ItemType.Weapon || this.itemdata.myType == ItemType.Armor || this.itemdata.myType == ItemType.Shoes)
+        {
+            int UID = Random.Range(int.MinValue, int.MaxValue);
+            GameData.Instance.playerdata.myItems.Add(new Item(UID, this.itemdata));
+        }
+        else
+        {
+            for(int i= 0; i< GameData.Instance.playerdata.myItems.Count; i++)
+            {
+                if (GameData.Instance.playerdata.myItems[i].itemdata == itemdata)
+                {
+                    GameData.Instance.playerdata.myItems[i].itemCount++;
+                    return;
+                }
+            }
+            GameData.Instance.playerdata.myItems.Add(new Item(this.itemdata));
+        } 
     }
 }

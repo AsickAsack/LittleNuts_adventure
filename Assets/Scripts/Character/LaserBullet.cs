@@ -28,7 +28,7 @@ public class LaserBullet : MonoBehaviour
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
-            other.GetComponent<BattleSystem>()?.OnDamage(GameData.Instance.playerdata.ATK);
+            other.GetComponent<BattleSystem>()?.OnDamage(GameData.Instance.playerdata.ATK + Random.Range(-2,3));
             Destroy(this.gameObject);
             Debug.Log("ºÎ¼­Áü");
             
