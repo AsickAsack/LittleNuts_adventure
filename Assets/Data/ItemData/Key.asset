@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d9606252809b943a5936a336080058, type: 3}
+  m_Script: {fileID: 11500000, guid: 8982a744142a8eb4ea94105e658ce41f, type: 3}
   m_Name: Key
   m_EditorClassIdentifier: 
   myType: 4
+  ItemCode: 9
   ItemName: "\uAC10\uC625 \uC5F4\uC1E0"
-  Description: "\uAC10\uC625\uBB38\uC758 \uC5F4\uC1E0\uC774\uB2E4."
+  Description: "\uAC10\uC625\uBB38\uC744 \uC5F4 \uC218 \uC788\uB294 \uC5F4\uC1E0\uC774\uB2E4."
   HP: 0
   ATK: 0
   DEF: 0

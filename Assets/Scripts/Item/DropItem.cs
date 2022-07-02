@@ -44,7 +44,7 @@ public class DropItem : MonoBehaviour
 
         if (this.itemdata.myType == ItemType.Weapon || this.itemdata.myType == ItemType.Armor || this.itemdata.myType == ItemType.Shoes)
         {
-            int UID = Random.Range(int.MinValue, int.MaxValue);
+            uint UID = (uint)Random.Range(uint.MinValue,uint.MaxValue);
             GameData.Instance.playerdata.myItems.Add(new Item(UID, this.itemdata));
         }
         else

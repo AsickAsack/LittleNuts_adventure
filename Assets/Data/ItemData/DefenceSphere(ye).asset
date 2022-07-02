@@ -9,17 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d9606252809b943a5936a336080058, type: 3}
+  m_Script: {fileID: 11500000, guid: 8982a744142a8eb4ea94105e658ce41f, type: 3}
   m_Name: DefenceSphere(ye)
   m_EditorClassIdentifier: 
   myType: 1
-  ItemName: "\uB178\uB791 \uB514\uD39C\uC2A4 \uAD6C"
-  Description: "\uCCB4\uB825\uACFC \uBC29\uC5B4\uB825\uC744 \uC62C\uB824\uC8FC\uB294
-    \uB178\uB780\uC0C9 \uAD6C."
-  HP: 150
+  ItemCode: 6
+  ItemName: "\uC610\uB85C\uC6B0 \uB514\uD39C\uB354"
+  Description: "\uC6B0\uC8FC\uC5D0\uC11C \uC4F0\uC774\uB294 \uBC29\uC5B4 \uC7A5\uBE44\uC774\uB2E4.
+    \n\uCCB4\uB825\uACFC \uBC29\uC5B4\uB825\uC744 \uC870\uAE08 \uC5C5\uADF8\uB808\uC774\uB4DC
+    \uC2DC\uCF1C\uC900\uB2E4."
+  HP: 100
   ATK: 0
-  DEF: 10
+  DEF: 15
   Value: 0
   Image: {fileID: 21300000, guid: 1b6253d11726c1d49bf921a9620b1d6e, type: 3}
-  BuyPrice: 30000
-  SellPrice: 15000
+  BuyPrice: 20000
+  SellPrice: 10000
+  RefItem:
+    UID: 0
+    itemCount: 0
+    itemdata: {fileID: 0}

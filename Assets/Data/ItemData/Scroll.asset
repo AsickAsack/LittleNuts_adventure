@@ -9,17 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d9606252809b943a5936a336080058, type: 3}
+  m_Script: {fileID: 11500000, guid: 235c515e3338d0941a96aa807620abf0, type: 3}
   m_Name: Scroll
   m_EditorClassIdentifier: 
   myType: 4
+  ItemCode: 2
   ItemName: "\uC758\uBB38\uC758 \uB450\uB8E8\uB9C8\uB9AC"
-  Description: "\uC911\uAC04\uBCF4\uC2A4\uAC00 \uAC00\uC9C0\uACE0 \uC788\uB358 \uB450\uB8E8\uB9C8\uB9AC.\\n\uC5B4\uCA4C\uBA74
-    \uC131\uC73C\uB85C \uAC00\uB294 \uD78C\uD2B8\uAC00 \uC788\uC744\uC9C0\uB3C4?"
+  Description: "\uC5B4\uB514\uC5D0 \uC4F0\uC77C\uC9C0 \uBAA8\uB974\uB294 \uB450\uB8E8\uB9C8\uB9AC\uC774\uB2E4.\n\uC131\uC73C\uB85C
+    \uAC08 \uC218 \uC788\uB294 \uD78C\uD2B8\uAC00 \uC788\uC744\uC9C0\uB3C4?"
   HP: 0
   ATK: 0
   DEF: 0
   Value: 0
   Image: {fileID: 21300000, guid: 4b61215c56174cb489119b1357a5b77c, type: 3}
   BuyPrice: 0
-  SellPrice: 1
+  SellPrice: 0
+  RefItem:
+    UID: 0
+    itemCount: 0
+    itemdata: {fileID: 0}

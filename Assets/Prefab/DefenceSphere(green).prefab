@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6643404584893517855}
   - component: {fileID: 3314058597810703527}
   - component: {fileID: 2576881685999437618}
+  - component: {fileID: -1218268094766579871}
   m_Layer: 0
   m_Name: DefenceSphere(green)
   m_TagString: Untagged
@@ -112,3 +113,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1218268094766579871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3371486703905667013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0a6ef6ee5595f4cb809fa9bf340746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemdata: {fileID: 11400000, guid: 619e6f34454a65d46b9f80ad66ed85ad, type: 2}

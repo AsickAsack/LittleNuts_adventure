@@ -9,16 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d9606252809b943a5936a336080058, type: 3}
-  m_Name: SlimeEtc
+  m_Script: {fileID: 11500000, guid: 8982a744142a8eb4ea94105e658ce41f, type: 3}
+  m_Name: Slime_Etc
   m_EditorClassIdentifier: 
   myType: 4
-  ItemName: "\uC2AC\uB77C\uC784\uC758 \uC794\uD574"
-  Description: "\uC2AC\uB77C\uC784\uC774 \uB0A8\uAE34 \uC794\uD574\uC774\uB2E4."
+  ItemCode: 10
+  ItemName: "\uC2AC\uB77C\uC784 \uC561\uCCB4"
+  Description: "\uC2AC\uB77C\uC784\uC774 \uB0A8\uAE34 \uC561\uCCB4\uC774\uB2E4."
   HP: 0
   ATK: 0
   DEF: 0
   Value: 0
   Image: {fileID: 21300000, guid: d1f94eb541d98c94c9e0a776707e9c7c, type: 3}
   BuyPrice: 0
-  SellPrice: 20
+  SellPrice: 50
+  RefItem:
+    UID: 0
+    itemCount: 0
+    itemdata: {fileID: 0}

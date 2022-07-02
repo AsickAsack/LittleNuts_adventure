@@ -8,12 +8,14 @@ public enum ItemType
     Weapon=0,Armor,Shoes,UseItem,etc
 }
 
-[CreateAssetMenu(fileName = "ItemData", menuName = "ItemData", order = int.MinValue+1)]
-public class ItemData : ScriptableObject
-{
 
+[System.Serializable]
+public abstract class ItemData : ScriptableObject
+{
     public ItemType myType;
+    public int ItemCode;
     public string ItemName;
+    [TextArea]
     public string Description;
     public float HP;
     public float ATK;
@@ -22,8 +24,10 @@ public class ItemData : ScriptableObject
     public Sprite Image;
     public int BuyPrice;
     public int SellPrice;
-    public UnityAction myAction;
+    public Item RefItem;
 
+    public abstract void UseItem();
 
+ 
 
 }

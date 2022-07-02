@@ -9,16 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d9606252809b943a5936a336080058, type: 3}
+  m_Script: {fileID: 11500000, guid: 235c515e3338d0941a96aa807620abf0, type: 3}
   m_Name: Mp_Potion
   m_EditorClassIdentifier: 
   myType: 3
+  ItemCode: 1
   ItemName: "MP \uD3EC\uC158"
-  Description: "\uB9C8\uB098\uB97C 50 \uD68C\uBCF5\uD574\uC900\uB2E4."
+  Description: "MP\uB97C 50 \uD68C\uBCF5\uC2DC\uCF1C\uC900\uB2E4."
   HP: 0
   ATK: 0
   DEF: 0
   Value: 50
   Image: {fileID: 21300000, guid: 2d7d9ae02b7159843ac7d5ead0f8b89a, type: 3}
-  BuyPrice: 600
-  SellPrice: 300
+  BuyPrice: 100
+  SellPrice: 50

@@ -4,12 +4,12 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Item
 {
-    public int UID;
+    public uint UID;
     public int itemCount;
     public ItemData itemdata;
 
     //장비템일때 각자의 고유번호 UID를 발급함
-    public Item(int UID, ItemData myData)
+    public Item(uint UID, ItemData myData)
     {
         this.UID = UID;
         this.itemCount = 1;
@@ -23,7 +23,7 @@ public class Item
         this.itemCount = 1;
     }
 
-    public Item(int UID, ItemData myData, int itemCount)
+    public Item(uint UID, ItemData myData, int itemCount)
     {
         this.UID = UID;
         this.itemCount = itemCount;

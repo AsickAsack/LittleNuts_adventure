@@ -313,6 +313,10 @@ public class GameSceneManager : MonoBehaviour
         EffectVolume_Text.text = (EffectSlider.value * 100).ToString("N0");
     }
 
+    public void TimeSet(int index)
+    {
+        Time.timeScale = index;
 
+    }
 
 }

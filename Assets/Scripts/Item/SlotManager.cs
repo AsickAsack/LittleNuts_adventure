@@ -10,7 +10,7 @@ public enum MenuType
 }
 
 
-public class SlotManager : MonoBehaviour , IPointerDownHandler
+public class SlotManager : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]
     public ItemSlot[] mySlots;
@@ -23,7 +23,8 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
     public Text GodlText;
     public GameObject[] MenuSelectObject;
     private GameObject MenuSelectImage;
-    public Image[] QuickSlotImage;
+    public GameObject[] QuickSlot;
+    public GameObject[] CheckQuickSlotPopup;
 
     public MenuType menutype = MenuType.Weapon;
 
@@ -47,13 +48,13 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
     //인벤토리 열때
     public void OpenInventory()
     {
-        
+
         GodlText.text = GameData.Instance.playerdata.money.ToString("N0");
-        
+
         ChangeType((int)menutype);
         SetMenuSelectImage();
 
-    
+
         if (GameData.Instance.playerdata.myItems.Count == 0)
         {
             ActiveDesCript(false);
@@ -75,15 +76,15 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
 
                 menutype = MenuType.Weapon;
 
-                for(int i=0;i<GameData.Instance.playerdata.myItems.Count;i++)
+                for (int i = 0; i < GameData.Instance.playerdata.myItems.Count; i++)
                 {
-                    if(GameData.Instance.playerdata.myItems[i].itemdata.myType == ItemType.Weapon ||
+                    if (GameData.Instance.playerdata.myItems[i].itemdata.myType == ItemType.Weapon ||
                         GameData.Instance.playerdata.myItems[i].itemdata.myType == ItemType.Armor ||
                         GameData.Instance.playerdata.myItems[i].itemdata.myType == ItemType.Shoes)
                     {
-                        for(int j=0;j<mySlots.Length;j++)
+                        for (int j = 0; j < mySlots.Length; j++)
                         {
-                            if(!mySlots[j].Icon.gameObject.activeSelf)
+                            if (!mySlots[j].Icon.gameObject.activeSelf)
                             {
                                 mySlots[j].myItem = GameData.Instance.playerdata.myItems[i];
                                 mySlots[j].Icon.gameObject.SetActive(true);
@@ -95,7 +96,7 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
 
                 }
 
-             
+
                 break;
             case 1:
 
@@ -104,7 +105,7 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
                 for (int i = 0; i < GameData.Instance.playerdata.myItems.Count; i++)
                 {
                     if (GameData.Instance.playerdata.myItems[i].itemdata.myType == ItemType.UseItem)
-        
+
                     {
                         for (int j = 0; j < mySlots.Length; j++)
                         {
@@ -149,7 +150,7 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
                 }
 
                 break;
-        
+
         }
 
         SetMenuSelectImage();
@@ -158,10 +159,10 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
     //아이템 초기화하고 다시 그려줌
     void InitSlots()
     {
-        if(SelectImage != null)
-        SelectImage.SetActive(false);
+        if (SelectImage != null)
+            SelectImage.SetActive(false);
 
-        for(int i=0;i<mySlots.Length;i++)
+        for (int i = 0; i < mySlots.Length; i++)
         {
             mySlots[i].Icon.gameObject.SetActive(false);
             mySlots[i].itemCountText.gameObject.SetActive(false);
@@ -172,8 +173,8 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        
-        if(eventData.pointerCurrentRaycast.gameObject.GetComponent<ItemSlot>().Icon.gameObject.activeSelf)
+
+        if (eventData.pointerCurrentRaycast.gameObject.GetComponent<ItemSlot>().Icon.gameObject.activeSelf)
         {
 
             CurSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<ItemSlot>();
@@ -199,7 +200,7 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
                 SelectImage.SetActive(true);
             }
 
-            
+
 
 
         }
@@ -207,20 +208,20 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
 
     public bool setDescription(int index)
     {
-        switch(menutype)
+        switch (menutype)
         {
             case MenuType.Weapon:
 
-              
-                
+
+
                 break;
             case MenuType.Use:
 
-             
+
                 break;
             case MenuType.Etc:
 
-             
+
                 break;
         }
         return false;
@@ -238,7 +239,7 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
     //장비,소비,기타템 버튼 선택시 이미지 활성화
     public void SetMenuSelectImage()
     {
-        if(MenuSelectImage != null)
+        if (MenuSelectImage != null)
         {
             MenuSelectImage.SetActive(false);
             MenuSelectImage = MenuSelectObject[(int)menutype];
@@ -259,24 +260,61 @@ public class SlotManager : MonoBehaviour , IPointerDownHandler
     }
 
 
-    public void QuickSlotRegister()
+    //UseItem인지 확인
+    public void CheckIsUseItem()
     {
-        if(CurSlot.myItem.itemdata.myType == ItemType.UseItem)
+        if (CurSlot.myItem.itemdata.myType == ItemType.UseItem)
         {
-            if(!QuickSlotImage[0].gameObject.activeSelf)
+            CheckQuickSlotPopup[0].SetActive(true);
+            CheckQuickSlotPopup[1].SetActive(true);
+        }
+        else
+        {
+            // 안된다는 효과음 재생
+        }
+
+
+    }
+
+
+    public void QuickSlotRegister(int index)
+    {
+        QuickSlot tempQuick = QuickSlot[index].GetComponent<QuickSlot>();
+
+        tempQuick.myItem = CurSlot.myItem;
+        tempQuick.Icon.gameObject.SetActive(true);
+        tempQuick.Icon.sprite = CurSlot.myItem.itemdata.Image;
+        tempQuick.ItemCount.gameObject.SetActive(true);
+        tempQuick.ItemCount.text = CurSlot.myItem.itemCount.ToString();
+
+    }
+
+
+    public void UseButton()
+    {
+        if (CurSlot != null)
+        {
+            if (CurSlot.myItem.itemdata.myType == ItemType.UseItem)
             {
-                QuickSlotImage[0].gameObject.SetActive(true);
-                QuickSlotImage[0].sprite = CurSlot.myItem.itemdata.Image;
+                ItemSlot temp = CurSlot;
+                CurSlot.myItem.itemdata.UseItem();
+                ChangeType((int)menutype);
+                if (temp.myItem.itemCount == 0)
+                {
+                    ActiveDesCript(false);
+                }
+                else
+                {
+                    CurSlot = temp;
+                    SelectImage = CurSlot.SelectImage;
+                    SelectImage.SetActive(true);
+                }
+
             }
             else
             {
-                if (!QuickSlotImage[1].gameObject.activeSelf)
-                {
-                    QuickSlotImage[1].gameObject.SetActive(true);
-                    QuickSlotImage[1].sprite = CurSlot.myItem.itemdata.Image;
-                }
+                //안된다는 효과음 재생
             }
-
         }
     }
 }

@@ -9,16 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d9606252809b943a5936a336080058, type: 3}
+  m_Script: {fileID: 11500000, guid: 8982a744142a8eb4ea94105e658ce41f, type: 3}
   m_Name: Space_Gun
   m_EditorClassIdentifier: 
   myType: 0
-  ItemName: "\uC6B0\uC8FC \uCD1D"
-  Description: "\uC6B0\uC8FC\uC758 \uAE30\uC6B4\uC774 \uB2F4\uACA8\uC788\uB294 \uCD1D."
+  ItemCode: 3
+  ItemName: "\uC2A4\uD398\uC774\uC2A4 \uAC74"
+  Description: "\uC6B0\uC8FC\uC5D0\uC11C \uAD6C\uD560 \uC218 \uC788\uB294 \uCD5C\uACE0\uC758
+    \uBB34\uAE30"
   HP: 0
-  ATK: 30
+  ATK: 100
   DEF: 0
   Value: 0
   Image: {fileID: 21300000, guid: 18b513565a5f5d04eaf363a515b90915, type: 3}
-  BuyPrice: 50000
-  SellPrice: 25000
+  BuyPrice: 0
+  SellPrice: 30000
