@@ -23,7 +23,7 @@ public class SkillBullet : MonoBehaviour
 
             yield return null;
         }
-        Destroy(this.gameObject);
+        ObjectPool.retrunObejct(this.gameObject, 1);
     }
 
 
@@ -39,12 +39,12 @@ public class SkillBullet : MonoBehaviour
                 coll.GetComponent<BattleSystem>()?.OnDamage(GameData.Instance.playerdata.ATK); //atk넣어야함
                 coll.GetComponent<Rigidbody>().AddExplosionForce(300,this.transform.position, 10f);
             }
-           Destroy(this.gameObject);
+            ObjectPool.retrunObejct(this.gameObject, 1);
         }
         else if (other.gameObject.layer != LayerMask.NameToLayer("PlayerDetect"))
         {
 
-            Destroy(gameObject);
+            ObjectPool.retrunObejct(this.gameObject, 1);
         }
     }
 }

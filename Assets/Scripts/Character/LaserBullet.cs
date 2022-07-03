@@ -20,7 +20,8 @@ public class LaserBullet : MonoBehaviour
 
             yield return null;
         }
-        Destroy(this.gameObject);
+      // Destroy(this.gameObject);
+        ObjectPool.retrunObejct(this.gameObject, 1);
     }
 
 
@@ -29,15 +30,14 @@ public class LaserBullet : MonoBehaviour
         if(other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             other.GetComponent<BattleSystem>()?.OnDamage(GameData.Instance.playerdata.ATK + Random.Range(-2,3));
-            Destroy(this.gameObject);
-            Debug.Log("ºÎ¼­Áü");
-            
+           // Destroy(this.gameObject);
+            ObjectPool.retrunObejct(this.gameObject, 1);
+
         }
         else if (other.gameObject.layer != LayerMask.NameToLayer("PlayerDetect"))
         {
-           
-            Destroy(gameObject);
-            Debug.Log("ºÎ¼­Áü2");
+            //Destroy(this.gameObject);
+            ObjectPool.retrunObejct(this.gameObject, 1);
         }
     }
 }

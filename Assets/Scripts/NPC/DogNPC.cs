@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DogNPC : MonoBehaviour
 {
 
-    public GameObject StartBtn;
+    public GameObject AllBtn;
     public GameObject NewCamera;
     public GameObject NPC;
     private Quaternion myRot;
@@ -26,7 +26,7 @@ public class DogNPC : MonoBehaviour
 
             if (EndCo != null)
                 StopCoroutine(EndCo);
-            StartBtn.gameObject.SetActive(true);
+            AllBtn.gameObject.SetActive(true);
             
         }
     }
@@ -54,8 +54,8 @@ public class DogNPC : MonoBehaviour
                 StopCoroutine(EndCo);
                 EndCo = StartCoroutine(OriginRot());
             }
-            StartBtn.gameObject.SetActive(false);
-            
+            AllBtn.gameObject.SetActive(false);
+          
 
         }
     }
@@ -78,8 +78,8 @@ public class DogNPC : MonoBehaviour
     {
         
         NewCamera.SetActive(true);
-        StartBtn.gameObject.SetActive(false);
-    
+        AllBtn.gameObject.SetActive(false);
+       
 
     }
 

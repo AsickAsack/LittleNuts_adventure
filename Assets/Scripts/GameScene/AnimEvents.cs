@@ -46,12 +46,22 @@ public class AnimEvents : MonoBehaviour
     {
         if (Detect.Enemy.Count == 0)
         {
-            GameObject obj = Instantiate(bullet, myMuzzle.position, BulletRot.rotation);
+            //GameObject obj = Instantiate(bullet, myMuzzle.position, BulletRot.rotation);
+            
+            GameObject obj = ObjectPool.GetObject(1,bullet);
+            obj.transform.position = myMuzzle.position;
+            obj.transform.rotation = BulletRot.rotation;
+            
             obj.GetComponent<LaserBullet>().ShotBullet(Vector3.forward,Space.Self);
         }
         else
         {
-            GameObject obj = Instantiate(bullet, myMuzzle.position, LookMonsterRot);
+            //GameObject obj = Instantiate(bullet, myMuzzle.position, LookMonsterRot);
+            
+            GameObject obj = ObjectPool.GetObject(1,bullet);
+            obj.transform.position = myMuzzle.position;
+            obj.transform.rotation = LookMonsterRot;
+            
             obj.GetComponent<LaserBullet>().ShotBullet(NearMonsterDir.normalized, Space.World);
         }
         this.GetComponentInParent<AudioSource>().PlayOneShot(SoundManager.Instance.myEffectClip[0]);
@@ -89,12 +99,19 @@ public class AnimEvents : MonoBehaviour
     {
         if (Detect.Enemy.Count == 0)
         {
-            GameObject obj = Instantiate(Skillbullet, myMuzzle.position, BulletRot.rotation);
+            
+            GameObject obj = ObjectPool.GetObject(1, Skillbullet);
+            obj.transform.position = myMuzzle.position;
+            obj.transform.rotation = BulletRot.rotation;
             obj.GetComponent<SkillBullet>().ShotBullet(Vector3.forward, Space.Self);
+            
         }
         else
         {
-            GameObject obj = Instantiate(Skillbullet, myMuzzle.position, LookMonsterRot);
+            
+            GameObject obj = ObjectPool.GetObject(1, Skillbullet);
+            obj.transform.position = myMuzzle.position;
+            obj.transform.rotation = LookMonsterRot;
             obj.GetComponent<SkillBullet>().ShotBullet(NearMonsterDir.normalized, Space.World);
         }
         this.GetComponentInParent<Rigidbody>().AddForce(-this.transform.forward * 150.0f);
