@@ -50,9 +50,6 @@ public abstract class Monster : MonoBehaviour, BattleSystem
         }
     }
 
-    [SerializeField] protected GameObject[] DropItem;
-    [SerializeField] protected GameObject DamageText;
-
 
     //Á×¾úÀ»¶§ ÀÌÆåÆ® 
     [SerializeField] protected GameObject BombEffect;
@@ -154,6 +151,7 @@ public abstract class Monster : MonoBehaviour, BattleSystem
     {
         Instantiate(BombEffect, this.transform.position, Quaternion.identity);
         myAnim.SetTrigger("Die");
+        GameData.Instance.EventString.Enqueue("EXP " + Mon.EXP + " È¹µæ!");
 
         SoundManager.Instance.DeleteEffectSource(this.GetComponent<AudioSource>());
         if (Player.GetComponentInChildren<AutoDetecting>().Enemy.Find(x => x.gameObject == this.gameObject))
@@ -161,26 +159,45 @@ public abstract class Monster : MonoBehaviour, BattleSystem
 
         GameData.Instance.playerdata.CurEXP += myStat.EXP;
 
-        GameObject DropTem = Instantiate(DropItem[0], this.transform.position, Quaternion.identity);
-        GameObject DropTem2 = Instantiate(DropItem[1], this.transform.position, Quaternion.identity);
+        GameObject DropTem = ObjectPool.Instance.ObjectManager[2].Get();
+        DropTem.transform.position = this.transform.position;
+        DropTem.transform.rotation = Quaternion.identity;
+        GameObject DropTem2 = null;
+        switch (Mon.MonsterType)
+        {
+            case MonsterType.Slime:
+                DropTem2 = ObjectPool.Instance.ObjectManager[4].Get();
+                break;
+            case MonsterType.TurtleShell:
+                DropTem2 = ObjectPool.Instance.ObjectManager[6].Get();
+                break;
+            case MonsterType.Mole:
+                DropTem2 = ObjectPool.Instance.ObjectManager[8].Get();
+                break;
+        }
+        DropTem2.transform.position = this.transform.position;
+        DropTem2.transform.rotation = Quaternion.identity;
+
 
         int RandomNum = Random.Range(0, 2);
         Vector3 RandomVector = RandomNum <= 0 ? Vector3.left : Vector3.right;
 
         DropTem.GetComponent<Rigidbody>().AddForce(Vector3.up * 200 + RandomVector * 100);
         DropTem2.GetComponent<Rigidbody>().AddForce(Vector3.up * 200 + RandomVector * 100);
-        Destroy(this.gameObject);
 
     }
 
     protected GameObject setDamage(float damage)
     {
-        GameObject DmText = Instantiate(DamageText, new Vector3(this.transform.position.x, this.transform.position.y+1.0f, this.transform.position.z), Camera.main.transform.rotation);
+        GameObject DmText = ObjectPool.Instance.ObjectManager[9].Get();
+        DmText.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z);
+        DmText.transform.rotation = Camera.main.transform.rotation;
         DmText.GetComponent<TextMesh>().text = damage.ToString();
 
         return DmText;
         
     }
+
 
 
 }

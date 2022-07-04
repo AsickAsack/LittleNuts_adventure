@@ -22,7 +22,7 @@ MonoBehaviour:
   DEF: 0
   Value: 0
   Image: {fileID: 21300000, guid: 1427f3484ee3e7a4db712f20cd43ccf7, type: 3}
-  BuyPrice: 0
+  BuyPrice: 10000
   SellPrice: 1500
   RefItem:
     UID: 0

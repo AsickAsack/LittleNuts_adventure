@@ -36,7 +36,7 @@ public class Coin : MonoBehaviour
             GameData.Instance.playerdata.money += money;
             collision.transform.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.myEffectClip[1]);
             GameData.Instance.EventString.Enqueue("µ·À» "+money+"¿ø È¹µæ Çß½À´Ï´Ù!");
-            Destroy(gameObject);
+            ObjectPool.Instance.ObjectManager[2].Release(this.gameObject);
         }
     }
 

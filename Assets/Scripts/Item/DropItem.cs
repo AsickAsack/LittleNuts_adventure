@@ -33,7 +33,24 @@ public class DropItem : MonoBehaviour
             collision.transform.GetComponent<AudioSource>().PlayOneShot(SoundManager.Instance.myEffectClip[1]);
             AddInventory();
             //나중에는 오브젝트 풀링으로 바꾸기
-            Destroy(gameObject);
+           switch(itemdata.ItemCode)
+            {
+                //슬라임
+                case 10:
+                    ObjectPool.Instance.ObjectManager[4].Release(this.gameObject);
+                    break;
+                    //터틀쉘
+                case 11:
+                    ObjectPool.Instance.ObjectManager[6].Release(this.gameObject);
+                    break;
+                    //몰밋
+                case 12:
+                    ObjectPool.Instance.ObjectManager[8].Release(this.gameObject);
+                    break;
+                default:
+                    Destroy(this.gameObject);
+                    break;
+            }
         }
     }
 

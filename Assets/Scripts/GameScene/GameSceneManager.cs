@@ -30,10 +30,12 @@ public class GameSceneManager : MonoBehaviour
     int saveIndex = 0;
 
     [Header("[알림 기능]")]
-    public Text EventText = null;
-    bool IsEvnet = false;
-    RectTransform EventTextRect = null;
-    Vector2 EventText_OrgPos = Vector2.zero;
+    public Text[] EventText = null;
+    public GameObject[] TextPanel = null;
+    public AudioSource PlayerAudio = null;
+    RectTransform[] EventTextRect = new RectTransform[2];
+    Vector2[] EventText_OrgPos = new Vector2[2];
+    public GameObject LevelUpText;
 
     [Header("[인벤토리 기능]")]
     public GameObject[] InvenSelectImage;
@@ -44,35 +46,65 @@ public class GameSceneManager : MonoBehaviour
     private void Awake()
     {
         myIndex = (int)GameData.Instance.playerdata.difficulty;
-        EventTextRect = EventText.GetComponent<RectTransform>();
-        EventText_OrgPos = EventTextRect.anchoredPosition;
+        for(int i=0;i< TextPanel.Length;i++)
+        { 
+            EventTextRect[i] = TextPanel[i].GetComponent<RectTransform>();
+            EventText_OrgPos[i] = EventTextRect[i].anchoredPosition;
+            TextPanel[i].SetActive(false);
+        }
         ChanegeText();
+        GameData.Instance.LevelUpAction += LevelUpEffect;
+    }
+
+    public void LevelUpEffect()
+    {
+        LevelUpText.SetActive(true);
+        StartCoroutine(WaitEffet());
+        PlayerAudio.PlayOneShot(SoundManager.Instance.myEffectClip[3]);
+
+    }
+
+    IEnumerator WaitEffet()
+    {
+        yield return new WaitForSeconds(1.0f);
+        LevelUpText.SetActive(false);
     }
 
     private void Update()
     {
-        if (GameData.Instance.EventString.Count != 0 && !IsEvnet)
+        if (GameData.Instance.EventString.Count != 0)
         {
-            IsEvnet = true;
-            StartCoroutine(DequeueEventString());
+            if (!TextPanel[0].activeSelf)
+            {
+                StartCoroutine(DequeueEventString(0));
+            }
+            else if(!TextPanel[1].activeSelf)
+            { 
+                StartCoroutine(DequeueEventString(1));
+            }
         }
     }
 
-    IEnumerator DequeueEventString()
+    IEnumerator DequeueEventString(int index)
     {
-        EventText.text = GameData.Instance.EventString.Dequeue();
+        TextPanel[index].gameObject.SetActive(true);
+        EventText[index].text = GameData.Instance.EventString.Dequeue();
+        PlayerAudio.PlayOneShot(SoundManager.Instance.myEffectClip[2]);
 
-        while (EventTextRect.anchoredPosition.y < 150.0f)
+        while (EventTextRect[index].anchoredPosition.y > -100.0f)
         {
-            EventText.enabled = true;
-            EventTextRect.anchoredPosition += Vector2.up * Time.deltaTime * 100.0f;
-
+             EventTextRect[index].anchoredPosition -= Vector2.up * Time.deltaTime * 250.0f;
             yield return null;
         }
-        EventText.enabled = false;
-        EventTextRect.anchoredPosition = EventText_OrgPos;
-
-        IsEvnet = false;
+        while (EventTextRect[index].anchoredPosition.y < 0.0f)
+        {
+            EventTextRect[index].anchoredPosition += Vector2.up * Time.deltaTime * 70.0f;
+            yield return null;
+        }
+        
+        EventTextRect[index].anchoredPosition = EventText_OrgPos[index];
+        TextPanel[index].gameObject.SetActive(false);
+        
     }
 
     public void DifficutyBtn(int index)

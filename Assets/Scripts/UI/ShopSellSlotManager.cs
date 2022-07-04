@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopSlotManager : MonoBehaviour
+public class ShopSellSlotManager : MonoBehaviour
 {
 
     public ShopMyItemSlot[] myItemSlots;
@@ -23,7 +23,13 @@ public class ShopSlotManager : MonoBehaviour
     //내 인벤토리 목록 초기화
     public void myItemList()
     {
-        for(int i = 0; i<GameData.Instance.playerdata.myItems.Count; i++)
+
+        for (int j = 0; j < myItemSlots.Length; j++)
+        {
+            myItemSlots[j].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i<GameData.Instance.playerdata.myItems.Count; i++)
         {
             for(int j = 0; j<myItemSlots.Length;j++)
             { 
@@ -41,9 +47,9 @@ public class ShopSlotManager : MonoBehaviour
                     myslot.SellPrice.gameObject.SetActive(true);
 
                     if (Temp.itemdata.myType == ItemType.UseItem || Temp.itemdata.myType == ItemType.etc)
-                        myItemSlots[j].GetComponent<ShopMyItemSlot>().SellPrice.text = Temp.itemdata.SellPrice.ToString() + "원\t" + Temp.itemCount + "개 보유";
+                        myItemSlots[j].GetComponent<ShopMyItemSlot>().SellPrice.text = "문독 매입가 "+Temp.itemdata.SellPrice.ToString("N0") + "원\n" + Temp.itemCount + "개 보유";
                     else
-                        myItemSlots[j].GetComponent<ShopMyItemSlot>().SellPrice.text = Temp.itemdata.SellPrice.ToString() + "원";
+                        myItemSlots[j].GetComponent<ShopMyItemSlot>().SellPrice.text = "문독 매입가 " + Temp.itemdata.SellPrice.ToString("N0") + "원";
 
                     break;
 

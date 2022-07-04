@@ -30,4 +30,12 @@ public class Item
         this.itemdata = myData;
     }
 
+
+    public Item(ItemData myData, int ItemCount)
+    {
+        
+        this.itemCount = ItemCount;
+        this.itemdata = myData;
+    }
+
 }

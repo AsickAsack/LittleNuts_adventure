@@ -12,12 +12,14 @@ public class DogNPC : MonoBehaviour
     private Quaternion myRot;
     Coroutine EndCo = null;
 
+    
 
-    private void Start()
+    private void Awake()
     {
         myRot = NPC.transform.rotation;
         SoundManager.Instance.AddEffectSource(GetComponentInParent<AudioSource>());
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -79,6 +81,7 @@ public class DogNPC : MonoBehaviour
         
         NewCamera.SetActive(true);
         AllBtn.gameObject.SetActive(false);
+        DialogueManager.Instance.SetDialogue(GameData.Instance.playerdata.StoryProcess);
        
 
     }

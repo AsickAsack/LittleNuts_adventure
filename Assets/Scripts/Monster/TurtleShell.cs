@@ -114,8 +114,7 @@ public class TurtleShell : Monster
     {
         float CirDamage = Damage + myStat.DEF;
         myStat.HP -= CirDamage;
-        GameObject DmObject = setDamage(CirDamage);
-        Destroy(DmObject, 0.5f);
+        GameObject DamageText = setDamage(CirDamage);
         PatrolTime = 0.0f;
         StartCoroutine(HitColor(mat));
         myAnim.SetTrigger("GetHit");

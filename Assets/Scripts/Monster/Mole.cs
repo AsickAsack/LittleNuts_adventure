@@ -25,6 +25,7 @@ public class Mole : Monster
                 break;
             case State.Death:
                 Death();
+                ObjectPool.Instance.ObjectManager[7].Release(this.gameObject);
                 break;
         }
 
@@ -93,8 +94,7 @@ public class Mole : Monster
     {
         float CirDamage = Damage + myStat.DEF;
         myStat.HP -= CirDamage;
-        GameObject DmObject = setDamage(CirDamage);
-        Destroy(DmObject, 0.5f);
+        GameObject DamageText = setDamage(CirDamage);
         PatrolTime = 0.0f;
         StartCoroutine(HitColor(mat));
         Dir = new Vector3(Player.transform.position.x, 0.0f, Player.transform.position.z) - this.transform.position;

@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class LaserBullet : MonoBehaviour
 {
+
+    public IObjectPool<GameObject> poolToreturn;
 
     public void ShotBullet(Vector3 Target,Space Where)
     {
@@ -20,8 +23,8 @@ public class LaserBullet : MonoBehaviour
 
             yield return null;
         }
-      // Destroy(this.gameObject);
-        ObjectPool.retrunObejct(this.gameObject, 1);
+        ObjectPool.Instance.ObjectManager[0].Release(this.gameObject);
+
     }
 
 
@@ -30,14 +33,14 @@ public class LaserBullet : MonoBehaviour
         if(other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             other.GetComponent<BattleSystem>()?.OnDamage(GameData.Instance.playerdata.ATK + Random.Range(-2,3));
-           // Destroy(this.gameObject);
-            ObjectPool.retrunObejct(this.gameObject, 1);
+            ObjectPool.Instance.ObjectManager[0].Release(this.gameObject);
+            
 
         }
         else if (other.gameObject.layer != LayerMask.NameToLayer("PlayerDetect"))
         {
-            //Destroy(this.gameObject);
-            ObjectPool.retrunObejct(this.gameObject, 1);
+            ObjectPool.Instance.ObjectManager[0].Release(this.gameObject);
+          
         }
     }
 }

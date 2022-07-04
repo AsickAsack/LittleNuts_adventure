@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class AnimEvents : MonoBehaviour
 {
     [Header("รั น฿ป็ ฐüทร")]
@@ -12,6 +14,7 @@ public class AnimEvents : MonoBehaviour
     public Transform Waist;
     public AutoDetecting Detect;
     public Transform myChar;
+
 
 
     private Quaternion LookMonsterRot;
@@ -46,22 +49,16 @@ public class AnimEvents : MonoBehaviour
     {
         if (Detect.Enemy.Count == 0)
         {
-            //GameObject obj = Instantiate(bullet, myMuzzle.position, BulletRot.rotation);
-            
-            GameObject obj = ObjectPool.GetObject(1,bullet);
-            obj.transform.position = myMuzzle.position;
-            obj.transform.rotation = BulletRot.rotation;
-            
-            obj.GetComponent<LaserBullet>().ShotBullet(Vector3.forward,Space.Self);
+             GameObject obj = ObjectPool.Instance.ObjectManager[0].Get();
+             obj.transform.position = myMuzzle.position;
+             obj.transform.rotation = BulletRot.rotation;
+             obj.GetComponent<LaserBullet>().ShotBullet(Vector3.forward,Space.Self);
         }
         else
         {
-            //GameObject obj = Instantiate(bullet, myMuzzle.position, LookMonsterRot);
-            
-            GameObject obj = ObjectPool.GetObject(1,bullet);
+            GameObject obj = ObjectPool.Instance.ObjectManager[0].Get();
             obj.transform.position = myMuzzle.position;
-            obj.transform.rotation = LookMonsterRot;
-            
+            obj.transform.rotation = BulletRot.rotation;
             obj.GetComponent<LaserBullet>().ShotBullet(NearMonsterDir.normalized, Space.World);
         }
         this.GetComponentInParent<AudioSource>().PlayOneShot(SoundManager.Instance.myEffectClip[0]);
@@ -99,8 +96,8 @@ public class AnimEvents : MonoBehaviour
     {
         if (Detect.Enemy.Count == 0)
         {
-            
-            GameObject obj = ObjectPool.GetObject(1, Skillbullet);
+
+            GameObject obj = ObjectPool.Instance.ObjectManager[1].Get();
             obj.transform.position = myMuzzle.position;
             obj.transform.rotation = BulletRot.rotation;
             obj.GetComponent<SkillBullet>().ShotBullet(Vector3.forward, Space.Self);
@@ -108,8 +105,8 @@ public class AnimEvents : MonoBehaviour
         }
         else
         {
-            
-            GameObject obj = ObjectPool.GetObject(1, Skillbullet);
+
+            GameObject obj = ObjectPool.Instance.ObjectManager[1].Get();
             obj.transform.position = myMuzzle.position;
             obj.transform.rotation = LookMonsterRot;
             obj.GetComponent<SkillBullet>().ShotBullet(NearMonsterDir.normalized, Space.World);

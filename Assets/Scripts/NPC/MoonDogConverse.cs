@@ -14,7 +14,7 @@ public class MoonDogConverse : MonoBehaviour, IPointerClickHandler
     public string[] mychat = new string[3];
     private Coroutine myco = null;
     public GameObject Arrow = null;
-    int index = 1;
+    int index = 2;
     public GameObject Cam;
     public GameObject notuch;
 
@@ -22,25 +22,39 @@ public class MoonDogConverse : MonoBehaviour, IPointerClickHandler
     string nickName = "문독전사";
 
     public Dictionary<int, string[]> ConversationDic = new Dictionary<int, string[]>();
+    public List<string> test = new List<string>();
 
     private void Awake()
     {
         TextAsset myConversation = Resources.Load("DogConverseindex") as TextAsset;
-        string[] splitData = myConversation.text.Split('\n');
+        string[] splitData = myConversation.text.Split('*');
 
-        for(int i=1;i< splitData.Length-1;i++)
+        for(int i=0;i< splitData.Length;i++)
         {
             string[] SplitConversation = splitData[i].Split(',');
-            ConversationDic.Add(int.Parse(SplitConversation[0]), SplitConversation);
+            for (int j = 0; j < SplitConversation.Length; j++)
+            {
+                if (SplitConversation[j] != "")
+                {
+                    test.Add(SplitConversation[j]);
+                }
+            }
         }
-    
+
+        foreach(string test1 in test)
+        {
+            Debug.Log(test1);
+        }
+
+
+
     }
 
 
 
     public void chat()
     {
-        mychat = ConversationDic[GameData.Instance.playerdata.DogProgress];
+        //mychat = ConversationDic[GameData.Instance.playerdata.DogProgress];
      
         if(myco == null)
         myco = StartCoroutine(Chatgo());
@@ -104,7 +118,7 @@ public class MoonDogConverse : MonoBehaviour, IPointerClickHandler
             }
             else
             {                
-                index = 1;
+                index = 2;
                 ConversationEnd = false;
                 Camera.main.transform.gameObject.SetActive(true);
                 this.gameObject.SetActive(false);

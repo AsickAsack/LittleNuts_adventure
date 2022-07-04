@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MoleMeat
   m_EditorClassIdentifier: 
   myType: 4
-  ItemCode: 11
+  ItemCode: 12
   ItemName: "\uB450\uB354\uC9C0 \uACE0\uAE30"
   Description: "\uB450\uB354\uC9C0\uC758 \uACE0\uAE30\uC774\uB2E4.\n\uB3C5\uC774
     \uC788\uC5B4\uC11C \uBA39\uC744 \uC218 \uC5C6\uB2E4."

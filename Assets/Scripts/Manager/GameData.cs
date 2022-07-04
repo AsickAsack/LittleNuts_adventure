@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Newtonsoft.Json;
 using System.IO;
 
@@ -37,7 +38,7 @@ public class GameData : MonoBehaviour
     public PlayerData playerdata = new PlayerData();
     public SaveData savedata = new SaveData();
     public Queue<string> EventString = new Queue<string>();
-   
+    public UnityAction LevelUpAction=null;
 
     private void Update()
     {
@@ -121,6 +122,7 @@ public class GameData : MonoBehaviour
             get => _Level;
             set
             {
+                GameData.Instance.LevelUpAction?.Invoke();
                 if(value != _Level)
                 {
                     StatPoint += 3;
@@ -128,7 +130,8 @@ public class GameData : MonoBehaviour
                 }
 
                 _Level = value;
-                
+
+                GameData.Instance.EventString.Enqueue("레벨 " + Level + "이 되었습니다!");
                 //맥스 HP,MP,SP업
             }
 
@@ -158,7 +161,7 @@ public class GameData : MonoBehaviour
 
             set => _DEF = value;
         }
-        private int _MoveSpeed = 5;
+        private int _MoveSpeed = 10;
         public int MoveSpeed
         {
             get
@@ -224,7 +227,8 @@ public class GameData : MonoBehaviour
                 _CurEXP = value;
                 if (_CurEXP > _MaxEXP)
                 {
-                    _CurEXP = 0.0f;
+                    float temp = _CurEXP - _MaxEXP;
+                    _CurEXP = temp;
                     Level += 1;
                     // 최대 EXP어떻게할지 _MaxEXP = 
                 }
@@ -243,10 +247,14 @@ public class GameData : MonoBehaviour
 
         #endregion
 
-        public int DogProgress = 2;
+        public int StoryProcess = 1;
         public bool InBaseCamp = true;
         public float BgmVolume = 0.5f;
         public float EffectVolume = 0.5f;
+
+        public Item CurDefenceSphere;
+        public Item CurWeapon;
+        public Item CurShoes;
 
 
         #region 저장변수들

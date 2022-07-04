@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class DamageText : MonoBehaviour
 {
-    public Color myColor;
 
-    private void Awake()
-    {
-        myColor = this.transform.GetComponent<TextMesh>().color;
-    }
 
 
     // Update is called once per frame
@@ -17,10 +12,10 @@ public class DamageText : MonoBehaviour
     {
         transform.rotation = Camera.main.transform.rotation;
 
-        myColor.a = Mathf.Lerp(myColor.a, 0.0f, Time.deltaTime * 5.0f);
-        this.transform.GetComponent<TextMesh>().color = myColor;
-
     }
 
-    
+    public void BackPool()
+    {
+        ObjectPool.Instance.ObjectManager[9].Release(this.gameObject);
+    }
 }
