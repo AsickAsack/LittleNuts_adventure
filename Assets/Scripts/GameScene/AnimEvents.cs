@@ -28,6 +28,7 @@ public class AnimEvents : MonoBehaviour
     private void Awake()
     {
         myAnim = this.GetComponent<Animator>();
+
     }
 
     //기본 공격 트리거
@@ -49,20 +50,29 @@ public class AnimEvents : MonoBehaviour
     {
         if (Detect.Enemy.Count == 0)
         {
-             GameObject obj = ObjectPool.Instance.ObjectManager[0].Get();
-             obj.transform.position = myMuzzle.position;
+            GameObject obj = ObjectPool.Instance.GetBullet();
+            obj.transform.position = myMuzzle.position;
              obj.transform.rotation = BulletRot.rotation;
-             obj.GetComponent<LaserBullet>().ShotBullet(Vector3.forward,Space.Self);
+            obj.SetActive(true);
+            obj.GetComponent<LaserBullet>().ShotBullet(Vector3.forward,Space.Self);
         }
         else
         {
-            GameObject obj = ObjectPool.Instance.ObjectManager[0].Get();
+            GameObject obj = ObjectPool.Instance.GetBullet();
             obj.transform.position = myMuzzle.position;
             obj.transform.rotation = BulletRot.rotation;
+            obj.SetActive(true);
             obj.GetComponent<LaserBullet>().ShotBullet(NearMonsterDir.normalized, Space.World);
         }
         this.GetComponentInParent<AudioSource>().PlayOneShot(SoundManager.Instance.myEffectClip[0]);
 
+    }
+
+    IEnumerator Delay()
+    {
+
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("1초 기다림");
     }
 
 
@@ -202,7 +212,7 @@ public class AnimEvents : MonoBehaviour
     {
         do 
         {
-            myChar.GetComponent<Rigidbody>().MovePosition(myChar.transform.position + this.transform.forward * 5.0f * Time.deltaTime);
+            myChar.GetComponent<Rigidbody>().MovePosition(myChar.transform.position + this.transform.forward * 1.0f * Time.deltaTime);
             yield return null;
         }
         while (myAnim.GetBool("IsRoll"));

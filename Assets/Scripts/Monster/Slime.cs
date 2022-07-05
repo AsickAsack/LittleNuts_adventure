@@ -132,4 +132,21 @@ public class Slime : Monster
         }
 
     }
+
+
+    public override void Death()
+    {
+        Instantiate(BombEffect, this.transform.position, Quaternion.identity);
+        myAnim.SetTrigger("Die");
+        GameData.Instance.EventString.Enqueue("EXP " + Mon.EXP + " È¹µæ!");
+        GameData.Instance.playerdata.CurEXP += myStat.EXP;
+
+        SoundManager.Instance.DeleteEffectSource(this.GetComponent<AudioSource>());
+        if (Player.GetComponentInChildren<AutoDetecting>().Enemy.Find(x => x.gameObject == this.gameObject))
+            Player.GetComponentInChildren<AutoDetecting>().Enemy.Remove(this.gameObject);
+
+        ObjectPool.Instance.DropItem(2, 4, this.transform.position); 
+
+        ObjectPool.Instance.ObjectManager[3].Release(this.gameObject);
+    }
 }

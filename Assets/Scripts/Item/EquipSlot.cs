@@ -84,7 +84,7 @@ public class EquipSlot : MonoBehaviour , IDropHandler
                 GameData.Instance.playerdata.CurDefenceSphere = slotmanager.CurSlot.myItem;
                 break;
             case ItemType.Shoes:
-                GameData.Instance.playerdata.MoveSpeed += (int)slotmanager.CurSlot.myItem.itemdata.Value;
+                GameData.Instance.playerdata.Speed_Point += (int)slotmanager.CurSlot.myItem.itemdata.Value;
                 GameData.Instance.playerdata.CurShoes = slotmanager.CurSlot.myItem;
                 break;
         }
@@ -103,7 +103,7 @@ public class EquipSlot : MonoBehaviour , IDropHandler
                 GameData.Instance.playerdata.DEF -= (int)CurSlotItem.itemdata.DEF;
                 break;
             case ItemType.Shoes:
-                GameData.Instance.playerdata.MoveSpeed -= (int)CurSlotItem.itemdata.Value;
+                GameData.Instance.playerdata.Speed_Point -= (int)CurSlotItem.itemdata.Value;
                 break;
         }
     }

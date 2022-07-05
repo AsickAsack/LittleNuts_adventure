@@ -48,18 +48,18 @@ public class GameData : MonoBehaviour
     public void Save(object SaveData,string SaveFileName)
     {
         string data = JsonConvert.SerializeObject(SaveData);
-        File.WriteAllText(Application.dataPath + SaveFileName, data);
+        File.WriteAllText(Application.persistentDataPath + SaveFileName, data);
     }
 
     public void Load(string LoadFileName)
     {
-        string data = File.ReadAllText(Application.dataPath + LoadFileName);
+        string data = File.ReadAllText(Application.persistentDataPath + LoadFileName);
         playerdata = JsonConvert.DeserializeObject<PlayerData>(data);
     }
 
     public void LoadIntroData()
     {
-        string data = File.ReadAllText(Application.dataPath + "IntroData.json");
+        string data = File.ReadAllText(Application.persistentDataPath + "IntroData.json");
         savedata = JsonConvert.DeserializeObject<SaveData>(data);
     }
 
@@ -83,7 +83,7 @@ public class GameData : MonoBehaviour
         savedata.SaveData_Map[index] = playerdata.SaveMap;
 
 
-        ScreenCapture.CaptureScreenshot(Application.dataPath + "ScreenShot" + index + ".png");
+        ScreenCapture.CaptureScreenshot(Application.persistentDataPath + "ScreenShot" + index + ".png");
         
 
         Save(savedata,"IntroData.json");
@@ -143,8 +143,8 @@ public class GameData : MonoBehaviour
         {
             get
             {
-                _ATK = _ATK + ATK_Point;
-                return _ATK;
+                
+                return _ATK + ATK_Point;
             }
 
             set => _ATK = value;
@@ -155,23 +155,35 @@ public class GameData : MonoBehaviour
         {
             get
             {
-                _DEF = _DEF + DEF_Point;
-                return _DEF;
+                
+                return _DEF + DEF_Point;
             }
 
             set => _DEF = value;
         }
-        private int _MoveSpeed = 10;
-        public int MoveSpeed
+        private float _MoveSpeed = 3;
+        public float MoveSpeed
         {
             get
             {
-                _MoveSpeed = _MoveSpeed + Speed_Point;
-                return _MoveSpeed;
+                
+                return _MoveSpeed+(float)(Speed_Point * 0.05f);
             }
 
             set => _MoveSpeed = value;
         }
+        //´«¼ÓÀÓ¿ë ½ºÅÝ
+        public float StatSpeed
+        {
+            get
+            {
+                return _MoveSpeed + Speed_Point;
+            }
+            private set => _MoveSpeed = value;
+        }
+
+
+
         public int ATK_Point = 0;
         public int DEF_Point = 0;
         public int Speed_Point = 0;

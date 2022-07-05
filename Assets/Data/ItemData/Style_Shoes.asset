@@ -20,7 +20,7 @@ MonoBehaviour:
   HP: 0
   ATK: 0
   DEF: 0
-  Value: 3
+  Value: 30
   Image: {fileID: 21300000, guid: 00595d2e362986a46bfc37efe471114f, type: 3}
   BuyPrice: 50000
   SellPrice: 25000

@@ -25,7 +25,7 @@ public class Mole : Monster
                 break;
             case State.Death:
                 Death();
-                ObjectPool.Instance.ObjectManager[7].Release(this.gameObject);
+                
                 break;
         }
 
@@ -104,4 +104,23 @@ public class Mole : Monster
 
     //µÎ´õÁö´Â OnAttack ÇÊ¿ä¾øÀ½
     public override void OnAttack() { }
+
+    public override void Death()
+    {
+        Instantiate(BombEffect, this.transform.position, Quaternion.identity);
+        GameData.Instance.EventString.Enqueue("EXP " + Mon.EXP + " È¹µæ!");
+        GameData.Instance.playerdata.CurEXP += myStat.EXP;
+
+        SoundManager.Instance.DeleteEffectSource(this.GetComponent<AudioSource>());
+        if (Player.GetComponentInChildren<AutoDetecting>().Enemy.Find(x => x.gameObject == this.gameObject))
+            Player.GetComponentInChildren<AutoDetecting>().Enemy.Remove(this.gameObject);
+
+        ObjectPool.Instance.DropItem(2,8, this.transform.position);
+
+        ObjectPool.Instance.ObjectManager[7].Release(this.gameObject);
+    }
+
+    
+
+
 }

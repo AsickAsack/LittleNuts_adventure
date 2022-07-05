@@ -252,7 +252,7 @@ public class GameSceneManager : MonoBehaviour
     {
         saveIndex = index;
 
-        if (System.IO.File.Exists(Application.dataPath+"GameData" + index + ".json"))
+        if (System.IO.File.Exists(Application.persistentDataPath + "GameData" + index + ".json"))
         {
             SaveCheckText.text = "저장 파일이 존재합니다.\n정말 저장 하시겠습니까?";
         }
@@ -266,7 +266,7 @@ public class GameSceneManager : MonoBehaviour
     //세이브 함수
     public void Saving()
     {
-        OptionCanvas.gameObject.SetActive(false);
+        OptionCanvas.enabled = false;
         GameData.Instance.Set_SaveData(saveIndex);
         StartCoroutine(DelayScreenShot());
         SetSaveText();
@@ -277,7 +277,7 @@ public class GameSceneManager : MonoBehaviour
     IEnumerator DelayScreenShot()
     {
         yield return new WaitForSeconds(0.1f);
-        OptionCanvas.gameObject.SetActive(true);
+        OptionCanvas.enabled=true;
     }
 
     //Bgm사운드 변경 함수

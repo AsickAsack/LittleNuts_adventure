@@ -6,8 +6,6 @@ public class SkillBullet : MonoBehaviour
 {
 
 
-
-
     public void ShotBullet(Vector3 Target, Space Where)
     {
         StartCoroutine(ShotTarget(Target, Where));
@@ -21,6 +19,21 @@ public class SkillBullet : MonoBehaviour
             BulletTime += Time.deltaTime;
             this.transform.Translate(Target * Time.deltaTime * 20.0f, Where);
 
+            if (Physics.Raycast(this.transform.position, this.transform.forward, out RaycastHit hit, Time.deltaTime * 20.0f, 1 << LayerMask.NameToLayer("Monster")))
+            {
+                if (hit.transform.GetComponent<BattleSystem>() != null)
+                {
+                    Collider[] colls;
+                    colls = Physics.OverlapSphere(this.transform.position, 1f, 1 << LayerMask.NameToLayer("Monster"));
+                    foreach (Collider coll in colls)
+                    {
+                        coll.GetComponent<BattleSystem>()?.OnDamage(GameData.Instance.playerdata.ATK);
+                        coll.GetComponent<Rigidbody>().AddExplosionForce(300, this.transform.position, 20f);
+                    }
+                    ObjectPool.Instance.ObjectManager[1].Release(this.gameObject);
+                }
+            }
+
             yield return null;
         }
        ObjectPool.Instance.ObjectManager[1].Release(this.gameObject);
@@ -32,14 +45,7 @@ public class SkillBullet : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
          
-            Collider[] colls;
-            colls = Physics.OverlapSphere(this.transform.position, 1f,1<<LayerMask.NameToLayer("Monster"));
-            foreach(Collider coll in colls)
-            {
-                coll.GetComponent<BattleSystem>()?.OnDamage(GameData.Instance.playerdata.ATK); //atk넣어야함
-                coll.GetComponent<Rigidbody>().AddExplosionForce(300,this.transform.position, 10f);
-            }
-            ObjectPool.Instance.ObjectManager[1].Release(this.gameObject);
+         
         }
         else if (other.gameObject.layer != LayerMask.NameToLayer("PlayerDetect"))
         { 

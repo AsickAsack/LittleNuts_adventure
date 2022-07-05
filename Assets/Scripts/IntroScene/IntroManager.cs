@@ -52,7 +52,7 @@ public class IntroManager : MonoBehaviour
                 SaveData_PlayTimetx[i].text = "총 플레이타임\n" + GameData.Instance.savedata.SaveData_PlayTime[i];
                 SaveData_Maptx[i].text = GameData.Instance.savedata.SaveData_Map[i];
 
-                byte[] byteTexture = System.IO.File.ReadAllBytes(Application.dataPath + "ScreenShot" + i + ".png");
+                byte[] byteTexture = System.IO.File.ReadAllBytes(Application.persistentDataPath + "ScreenShot" + i + ".png");
                 Texture2D texture = new Texture2D(Screen.width,Screen.height);
                 if (byteTexture.Length > 0)
                 {

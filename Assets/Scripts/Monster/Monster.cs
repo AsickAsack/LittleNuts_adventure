@@ -61,6 +61,7 @@ public abstract class Monster : MonoBehaviour, BattleSystem
     //자식클래스에서 꼭 구현해야할 추상함수들
     public abstract void Move();
     public abstract void Battle();
+    public abstract void Death();
     public abstract void ChangeState(State s);
     public abstract void OnAttack();
     public abstract void OnDamage(float damage);
@@ -146,47 +147,6 @@ public abstract class Monster : MonoBehaviour, BattleSystem
 
     }
 
-    //죽었을때 
-    protected void Death()
-    {
-        Instantiate(BombEffect, this.transform.position, Quaternion.identity);
-        myAnim.SetTrigger("Die");
-        GameData.Instance.EventString.Enqueue("EXP " + Mon.EXP + " 획득!");
-
-        SoundManager.Instance.DeleteEffectSource(this.GetComponent<AudioSource>());
-        if (Player.GetComponentInChildren<AutoDetecting>().Enemy.Find(x => x.gameObject == this.gameObject))
-            Player.GetComponentInChildren<AutoDetecting>().Enemy.Remove(this.gameObject);
-
-        GameData.Instance.playerdata.CurEXP += myStat.EXP;
-
-        GameObject DropTem = ObjectPool.Instance.ObjectManager[2].Get();
-        DropTem.transform.position = this.transform.position;
-        DropTem.transform.rotation = Quaternion.identity;
-        GameObject DropTem2 = null;
-        switch (Mon.MonsterType)
-        {
-            case MonsterType.Slime:
-                DropTem2 = ObjectPool.Instance.ObjectManager[4].Get();
-                break;
-            case MonsterType.TurtleShell:
-                DropTem2 = ObjectPool.Instance.ObjectManager[6].Get();
-                break;
-            case MonsterType.Mole:
-                DropTem2 = ObjectPool.Instance.ObjectManager[8].Get();
-                break;
-        }
-        DropTem2.transform.position = this.transform.position;
-        DropTem2.transform.rotation = Quaternion.identity;
-
-
-        int RandomNum = Random.Range(0, 2);
-        Vector3 RandomVector = RandomNum <= 0 ? Vector3.left : Vector3.right;
-
-        DropTem.GetComponent<Rigidbody>().AddForce(Vector3.up * 200 + RandomVector * 100);
-        DropTem2.GetComponent<Rigidbody>().AddForce(Vector3.up * 200 + RandomVector * 100);
-
-    }
-
     protected GameObject setDamage(float damage)
     {
         GameObject DmText = ObjectPool.Instance.ObjectManager[9].Get();
@@ -198,6 +158,12 @@ public abstract class Monster : MonoBehaviour, BattleSystem
         
     }
 
+    protected IEnumerator Delay(float time,int index)
+    {
+        
+        yield return new WaitForSeconds(time);
+        ObjectPool.Instance.ObjectManager[index].Release(this.gameObject);
 
+    }
 
 }

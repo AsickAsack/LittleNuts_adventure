@@ -8,10 +8,25 @@ public class LittleNut : Character
     public GameObject myCharacter;
     public float limit = 0.0f;
     Quaternion v3Rotation = Quaternion.identity;
+    private Vector3 dir = Vector3.zero;
 
     private void Start()
     {
         SoundManager.Instance.AddEffectSource(this.GetComponent<AudioSource>());
+    }
+
+    private void FixedUpdate()
+    {
+        if (!myAnim.GetBool("IsSkillShot") && !myAnim.GetBool("IsRoll"))
+        {
+
+            v3Rotation = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
+
+            dir = v3Rotation * new Vector3(myJoystic.JoysticDir.x, 0, myJoystic.JoysticDir.y);
+
+
+            myRigid.MovePosition(transform.position + dir * Time.deltaTime * GameData.Instance.playerdata.MoveSpeed);
+        }
     }
 
 
@@ -30,15 +45,6 @@ public class LittleNut : Character
             else
                 myAnim.SetBool("IsRun", false);
 
-            
-            v3Rotation = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
-
-            Vector3 dir = v3Rotation * new Vector3(myJoystic.JoysticDir.x, 0, myJoystic.JoysticDir.y);
-
-            //this.transform.position += dir * Time.deltaTime * MoveSpeed;
-
-            myRigid.MovePosition(transform.position + dir * Time.deltaTime * GameData.Instance.playerdata.MoveSpeed);
-                
 
             if (!(myJoystic.JoysticDir.x == 0 && myJoystic.JoysticDir.y == 0) && myJoystic.JoysticDir != Vector3.zero && !myAnim.GetBool("IsShot"))
             {
@@ -47,8 +53,6 @@ public class LittleNut : Character
                 myCharacter.transform.rotation = Quaternion.Slerp(myCharacter.transform.rotation, Quaternion.Euler(0, mylook.eulerAngles.y, 0), Time.deltaTime * 15.0f);
             }
         }
-
-
     }
 
 

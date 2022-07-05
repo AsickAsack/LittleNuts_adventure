@@ -19,13 +19,13 @@ public class StatCanavs : MonoBehaviour
             switch(index)
             {
                 case 0:
-                    GameData.Instance.playerdata.ATK += 1;
+                    GameData.Instance.playerdata.ATK_Point += 1;
                     break;
                 case 1:
-                    GameData.Instance.playerdata.DEF += 1;
+                    GameData.Instance.playerdata.DEF_Point += 1;
                     break;
                 case 2:
-                    GameData.Instance.playerdata.MoveSpeed += 1;
+                    GameData.Instance.playerdata.Speed_Point += 1;
                     break;
             }
             GameData.Instance.playerdata.StatPoint -= 1;
@@ -59,7 +59,7 @@ public class StatCanavs : MonoBehaviour
     {
         ATK_tx.text = GameData.Instance.playerdata.ATK.ToString();
         DEF_tx.text = GameData.Instance.playerdata.DEF.ToString();
-        SPEED_tx.text = GameData.Instance.playerdata.MoveSpeed.ToString();
+        SPEED_tx.text = GameData.Instance.playerdata.StatSpeed.ToString();
         AllStat_tx.text = GameData.Instance.playerdata.StatPoint.ToString();
 
     }
